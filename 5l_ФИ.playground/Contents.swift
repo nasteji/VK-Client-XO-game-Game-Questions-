@@ -16,6 +16,10 @@ enum Windows {
     case closeWindows
 }
 
+class CarCounter {
+    static var carCounter: Int = 0
+}
+
 protocol Car {
     var model: String { get }
     var year: UInt { get }
@@ -62,6 +66,10 @@ class SportCar: Car {
         self.windows = .closeWindows
         self.sportsTiresIncluded = sportsTiresIncluded
         self.sportBodyType = sportBodyType
+        CarCounter.carCounter += 1
+    }
+    deinit {
+        CarCounter.carCounter -= 1
     }
     func printSpecificProperties() {
         print("---------------")
@@ -118,6 +126,10 @@ class TrunkCar: Car {
         self.sleepingPlace = sleepingPlace
         self.trunkVolume = trunkVolume
         self.trunkIsOccupied = 0.0
+        CarCounter.carCounter += 1
+    }
+    deinit {
+        CarCounter.carCounter -= 1
     }
     func printSpecificProperties() {
         print("---------------")
@@ -151,7 +163,7 @@ extension TrunkCar: CustomStringConvertible {
         return "---------------\n model = \(model)\n year = \(year) \n old = \(old) \n sleepingPlace = \(sleepingPlace) \n trailer = \(trailer) \n trunkVolume = \(trunkVolume) \n trunkIsOccupied = \(trunkIsOccupied) \n engineState = \(engineState) \n windows = \(windows) \n---------------"
     }
 }
-
+CarCounter.carCounter
 var sportCar1 = SportCar(model: "porche", year: 2017, sportsTiresIncluded: false, sportBodyType: .citySportsCar)
 sportCar1.old
 sportCar1.changeWindows(.openWindows)
@@ -159,13 +171,17 @@ sportCar1.changeEngineState(.action)
 sportCar1.changeSportsTiresIncluded(true)
 print(sportCar1)
 sportCar1.printSpecificProperties()
+CarCounter.carCounter
 
-var trunkCar1 = TrunkCar(model: "mann", year: 2009, trailer: .trailer_Is_Attached, sleepingPlace: .noSleepingPlace, trunkVolume: 300)
-trunkCar1.changeSleepingPlace(.twoBerth)
-trunkCar1.changeTrailer(.trailer_Is_Unpinned)
-trunkCar1.changeTrunkIsOccupied(70)
-trunkCar1.changeTrunkIsOccupied(500)
-trunkCar1.changeTrunkIsOccupied(-100)
-print(trunkCar1)
-trunkCar1.printSpecificProperties()
+var trunkCar1: TrunkCar? = TrunkCar(model: "mann", year: 2009, trailer: .trailer_Is_Attached, sleepingPlace: .noSleepingPlace, trunkVolume: 300)
+trunkCar1!.changeSleepingPlace(.twoBerth)
+trunkCar1!.changeTrailer(.trailer_Is_Unpinned)
+trunkCar1!.changeTrunkIsOccupied(70)
+trunkCar1!.changeTrunkIsOccupied(500)
+trunkCar1!.changeTrunkIsOccupied(-100)
+print(trunkCar1!)
+trunkCar1!.printSpecificProperties()
+CarCounter.carCounter
 
+trunkCar1 = nil
+CarCounter.carCounter
