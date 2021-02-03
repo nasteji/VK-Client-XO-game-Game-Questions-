@@ -18,6 +18,14 @@ enum Windows {
 
 class CarCounter {
     static var carCounter: Int = 0
+    init() {
+        CarCounter.carCounter += 1
+        print("Car № \(CarCounter.carCounter) is released")
+    }
+    deinit {
+        CarCounter.carCounter -= 1
+        print("Car №\(CarCounter.carCounter + 1) is deleted")
+    }
 }
 
 protocol Car {
@@ -50,7 +58,7 @@ enum SportBodyType {
     case citySportsCar
     case racingCar
 }
-class SportCar: Car {
+class SportCar: CarCounter, Car {
     
     var model: String
     var year: UInt
@@ -66,11 +74,9 @@ class SportCar: Car {
         self.windows = .closeWindows
         self.sportsTiresIncluded = sportsTiresIncluded
         self.sportBodyType = sportBodyType
-        CarCounter.carCounter += 1
+        super.init()
     }
-    deinit {
-        CarCounter.carCounter -= 1
-    }
+    
     func printSpecificProperties() {
         print("---------------")
         print("sportBodyType = \(sportBodyType)")
@@ -97,7 +103,7 @@ enum SleepingPlace {
     case oneBerth
     case twoBerth
 }
-class TrunkCar: Car {
+class TrunkCar: CarCounter, Car {
     
     var model: String
     var year: UInt
@@ -126,11 +132,9 @@ class TrunkCar: Car {
         self.sleepingPlace = sleepingPlace
         self.trunkVolume = trunkVolume
         self.trunkIsOccupied = 0.0
-        CarCounter.carCounter += 1
+        super.init()
     }
-    deinit {
-        CarCounter.carCounter -= 1
-    }
+    
     func printSpecificProperties() {
         print("---------------")
         print("sleepingPlace = \(sleepingPlace)")
