@@ -151,7 +151,7 @@ extension LoginFormController: WKNavigationDelegate {
         userService.loadFriends()
         userService.loadUserPhotos()
         userService.loadGroups()
-        userService.searchByUserGroups(searchText: "вера полозкова")
+        userService.searchByUserGroups()
     }
     
 }

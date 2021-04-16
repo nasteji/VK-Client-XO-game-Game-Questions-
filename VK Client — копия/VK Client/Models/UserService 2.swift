@@ -79,13 +79,13 @@ class UserService {
                 print("Группы пользователя: \(String(describing: repsonse.value))")
         }
     }
-    func searchByUserGroups(searchText: String) {
+    func searchByUserGroups() {
         let path = "/method/search.getHints?"
         let url = baseUrl+path
         let parameters: Parameters = [
-            "q": searchText,
+            "q": "вера полозкова",
             "filters": "groups",
-            "search_global": "1",
+            "search_global": "0",
             "access_token": user.token,
             "v": "5.130"
         ]
