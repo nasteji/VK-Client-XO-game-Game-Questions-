@@ -17,4 +17,8 @@ class NewsTextCell: UITableViewCell {
         super.awakeFromNib()
     }
     
+    func configure(news: News) {
+        textNewsLabel.text = news.text
+        textNewsLabel.sizeToFit()
+    }
 }

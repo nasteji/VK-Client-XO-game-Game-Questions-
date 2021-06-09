@@ -30,12 +30,13 @@ struct News: Codable {
     let comments: Comments?
     let likes: PhotoLikes?
     let reposts: Reposts?
-    let type, postType: String
-    let date: Date
+    let type: String?
+    let postType: String?
+    let date: Date?
     let sourceID: Int
-    let text: String
+    let text: String?
     let attachments: [Attachment]?
-    let postID: Int
+    let postID: Int?
 
     enum CodingKeys: String, CodingKey {
         case comments, type, likes, reposts
@@ -50,7 +51,7 @@ struct News: Codable {
 
 // MARK: - Comments
 struct Comments: Codable {
-    let count, canPost: Int
+    let count, canPost: Int?
 
     enum CodingKeys: String, CodingKey {
         case count
@@ -60,7 +61,7 @@ struct Comments: Codable {
 
 // MARK: - Attachment
 struct Attachment: Codable {
-    let type: String
+    let type: String?
     let photo: PhotoNews?
     let audio: Audio?
     let video: Video?
@@ -68,8 +69,8 @@ struct Attachment: Codable {
 
 // MARK: - Video
 struct Video: Codable {
-    let accessKey: String
-    let canComment, canLike, canRepost, canSubscribe: Int
+    let accessKey: String?
+    let canComment, canLike, canRepost, canSubscribe: Int?
     let canAddToFaves, comments, date: Int?
     let videoDescription: String?
     let duration: Int?
@@ -77,9 +78,9 @@ struct Video: Codable {
     let firstFrame130, firstFrame160, firstFrame320, firstFrame800: String?
     let firstFrame1280: String?
     let width, height: Int?
-    let id, ownerID: Int
-    let title, trackCode: String
-    let views: Int
+    let id, ownerID: Int?
+    let title, trackCode: String?
+    let views: Int?
 
    enum CodingKeys: String, CodingKey {
        case accessKey = "access_key"
@@ -109,15 +110,15 @@ struct Video: Codable {
 }
 // MARK: - Audio
 struct Audio: Codable {
-    let id: Int
-    let storiesCoverAllowed: Bool
-    let url: String
-    let title: String
-    let ownerID, date: Int
-    let shortVideosAllowed: Bool
+    let id: Int?
+    let storiesCoverAllowed: Bool?
+    let url: String?
+    let title: String?
+    let ownerID, date: Int?
+    let shortVideosAllowed: Bool?
     let genreID, lyricsID, duration: Int?
-    let artist: String
-    let storiesAllowed: Bool
+    let artist: String?
+    let storiesAllowed: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -135,17 +136,17 @@ struct Audio: Codable {
 
 // MARK: - Photo
 struct PhotoNews: Codable {
-    let id: Int
+    let id: Int?
     let photo2560, photo807, photo1280: String?
     let width: Int?
     let accessKey: String
     let photo604, photo130: String?
     let userID: Int?
-    let date, ownerID: Int
-    let height: Int
-    let text: String
-    let hasTags: Bool
-    let albumID: Int
+    let date, ownerID: Int?
+    let height: Int?
+    let text: String?
+    let hasTags: Bool?
+    let albumID: Int?
     let photo75: String?
 
     enum CodingKeys: String, CodingKey {
@@ -169,7 +170,7 @@ struct PhotoNews: Codable {
 
 // MARK: - Reposts
 struct Reposts: Codable {
-    let count, userReposted: Int
+    let count, userReposted: Int?
 
     enum CodingKeys: String, CodingKey {
         case count
@@ -179,19 +180,17 @@ struct Reposts: Codable {
 
 // MARK: - Profile
 struct Profile: Codable {
-    let online, id: Int
-    let photo100: String
-    let lastName: String
-    let photo50: String
-    let onlineInfo: OnlineInfo
-    let sex: Int
+    let online, id: Int?
+    let photo: String
+    let lastName: String?
+    let onlineInfo: OnlineInfo?
+    let sex: Int?
     let screenName, firstName: String?
 
     enum CodingKeys: String, CodingKey {
         case online, id
-        case photo100 = "photo_100"
+        case photo = "photo_100"
         case lastName = "last_name"
-        case photo50 = "photo_50"
         case onlineInfo = "online_info"
         case sex
         case screenName = "screen_name"
@@ -201,9 +200,9 @@ struct Profile: Codable {
 
 // MARK: - OnlineInfo
 struct OnlineInfo: Codable {
-    let isMobile: Bool
+    let isMobile: Bool?
     let lastSeen: Int?
-    let isOnline, visible: Bool
+    let isOnline, visible: Bool?
 
     enum CodingKeys: String, CodingKey {
         case isMobile = "is_mobile"

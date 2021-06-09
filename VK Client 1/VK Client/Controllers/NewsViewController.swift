@@ -10,81 +10,87 @@ import RealmSwift
 
 class NewsViewController: UITableViewController {
 
-    var myNews: [News] = []
-    var newsGroup: [Group] = []
+    var news: [News] = []
+    var source: [SourceNews] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userService.loadNews() { [weak self] news,groups  in
-            self?.myNews = news
-            self?.newsGroup = groups
-            self?.tableView.reloadData()
-        }
-
+        loadData()
+       
         tableView.register(UINib(nibName: "NewsTextCell", bundle: nil), forCellReuseIdentifier: NewsTextCell.reuseId)
         tableView.register(UINib(nibName: "NewsPhotoCell", bundle: nil), forCellReuseIdentifier: NewsPhotoCell.reuseId)
-        tableView.register(UINib(nibName: "AllNewsCell", bundle: nil), forCellReuseIdentifier: AllNewsCell.reuseId)
         
         let headerNib = UINib(nibName: "NewsHeaderView", bundle: nil)
         tableView.register(headerNib, forHeaderFooterViewReuseIdentifier: NewsHeaderView.reuseId)
         let footerNib = UINib(nibName: "NewsFooterView", bundle: nil)
         tableView.register(footerNib, forHeaderFooterViewReuseIdentifier: NewsFooterView.reuseId)
     }
+   
+    // MARK: - Load Data
+    
+    func loadData() {
+            
+        userService.loadNews() { [weak self] news, groups, profiles in
+                
+            self?.news = news
+
+            for index in 0...news.count - 1 {
+                var id = news[index].sourceID
+
+                switch id {
+                case 0...:
+                    for i in 0...profiles!.count - 1 {
+                        if id == profiles?[i].id {
+                            self?.source.append(SourceNews(group: nil, profile: profiles?[i]))
+                        }
+                    }
+                default:
+                    id.negate()
+                    for i in 0...groups.count - 1 {
+                        if id == groups[i].id {
+                            self?.source.append(SourceNews(group: groups[i], profile: nil))
+                        }
+                    }
+                }
+            }
+            dispatchGroup.notify(queue: DispatchQueue.main) {
+                self?.tableView.reloadData()
+            }
+        }
+       
+    }
     
     // MARK: - Footer
     
-    //данные в footer
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         
         guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsFooterView.reuseId) as? NewsFooterView
         else { return nil }
         
         footerView.color(color: tableView.backgroundColor!, opacity: 1)
-        
-        if let likes = myNews[section].likes {
-            footerView.likeControl.button.setTitle(String(likes.count), for: .normal)
-            if likes.userLikes == 1 {
-                footerView.likeControl.isOn = true
-            }
-        }
-        if let repost = myNews[section].reposts {
-            footerView.repostButton.setTitle(String(repost.count), for: .normal)
-        }
-       
-        if let comments = myNews[section].comments {
-            footerView.commentButton.setTitle(String(comments.count), for: .normal)
-        }
+        footerView.configure(news: news[section])
         
         return footerView
     }
-    //высота footer
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         NewsFooterView.height
     }
     
     // MARK: - Header
     
-    //данные в header
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsHeaderView.reuseId) as? NewsHeaderView
         else { return nil }
 
         headerView.color(color: tableView.backgroundColor!, opacity: 1)
+        headerView.configure(news: news[section], source: source[section])
         
-        headerView.nameLabel.text = newsGroup[section].name
-        headerView.dateLabel.text = myNews[section].date.unixTime()
-        if let url = URL(string: newsGroup[section].photo) {
-            let data = try? Data(contentsOf: url)
-            headerView.imageViewAvatar.image = UIImage(data: data!)
-        } else {
-            headerView.imageViewAvatar.image = UIImage(systemName: "person.3.fill")
-        }
-
         return headerView
     }
-    //высота header
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return NewsHeaderView.height
     }
@@ -93,57 +99,46 @@ class NewsViewController: UITableViewController {
     
     //кол-во секций в таблице
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return myNews.count
+        return news.count
     }
     //кол-во строк в секции
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 3
+    }
+    //высота ячеек
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let news = news[indexPath.section]
+        
+        switch indexPath.row {
+        case 0:
+            return news.text == "" ? 0 : UITableView.automaticDimension
+        case 1:
+            return news.attachments?.first?.photo?.photo604 == nil ? 0 : UITableView.automaticDimension
+        default:
+            return news.text == "" && news.attachments?.first?.photo?.photo604 == nil ? UITableView.automaticDimension : 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let photo = myNews[indexPath.section].attachments?.first?.photo?.photo604
-        let text = myNews[indexPath.section].text
+        let news = news[indexPath.section]
         
-        //новость содержит текст и фото
-        if text != "" && photo != nil {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: AllNewsCell.reuseId, for: indexPath) as! AllNewsCell
-            
-            cell.textNewsLabel.text = myNews[indexPath.section].text
-            cell.textNewsLabel.sizeToFit()
-            
-            let url = URL(string: photo!)!
-            let data = try? Data(contentsOf: url)
-            cell.imageNewsView.image = UIImage(data: data!)
-            
-            return cell
-        }
-        //новость содержит только фото
-        if photo != nil {
-                
-            let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
-            
-            let url = URL(string: photo!)!
-            let data = try? Data(contentsOf: url)
-            cell.imageNewsView.image = UIImage(data: data!)
-            
-            return cell
-        }
-        //новость содержит только текст
-        if text != "" {
+        switch indexPath.row {
+        case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsTextCell.reuseId, for: indexPath) as! NewsTextCell
-            
-            cell.textNewsLabel.text = myNews[indexPath.section].text
-            cell.textNewsLabel.sizeToFit()
-            
+            cell.configure(news: news)
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
+            cell.configure(news: news)
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
+            cell.imageNewsView.image = UIImage(named: "placeholder")
             return cell
         }
         
-        //placeholder, если новость без фото и текста
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
-        cell.imageNewsView.image = UIImage(named: "placeholder")
-        return cell
     }
             
             

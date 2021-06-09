@@ -24,4 +24,16 @@ class NewsFooterView: UITableViewHeaderFooterView {
         viewColor.alpha = opacity
     }
 
+    func configure(news: News) {
+
+        if news.likes?.userLikes == 1 {
+            likeControl.isOn = true
+        }
+        likeControl.button.setTitle(String(news.likes?.count ?? 0), for: .normal)
+        
+        repostButton.setTitle(String(news.reposts?.count ?? 0), for: .normal)
+        commentButton.setTitle(String(news.comments?.count ?? 0), for: .normal)
+    }
+    
+    
 }

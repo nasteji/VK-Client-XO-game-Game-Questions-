@@ -12,7 +12,7 @@ struct GroupList: Codable {
     let response: GroupResponse
 }
 struct GroupResponse: Codable {
-    let count: Int
+    let count: Int?
     let items: [Group]
 }
 class Group: Object, Codable {

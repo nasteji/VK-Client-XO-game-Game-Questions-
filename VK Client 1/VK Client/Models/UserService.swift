@@ -9,6 +9,8 @@ import Foundation
 import Alamofire
 import RealmSwift
 
+let dispatchGroup = DispatchGroup()
+
 class UserService {
     
     let baseUrl = "https://api.vk.com/method/"
@@ -159,31 +161,31 @@ class UserService {
     }
     
     // MARK: - News
-    func loadNews(completion: @escaping([News], [Group]) -> Void) {
-        
+    func loadNews(completion: @escaping([News], [Group], [Profile]?) -> Void) {
+
         let path = "newsfeed.get?"
         let url = baseUrl+path
         let parameters: Parameters = [
             "user_ids": user.userId,
             "access_token": user.token,
             "filters": "post",
-            "count": "10",
+            "count": "100",
             "v": version
         ]
-        
+
         Alamofire.request(url, method: .get, parameters: parameters).responseData { response in
             guard let data = response.value else { return }
                 do {
-                    print(data.prettyPrintedJSONString!)
-                    
                     let news = try JSONDecoder().decode(NewsList.self, from: data)
                     
-                    completion(news.response.items, news.response.groups)
+                    DispatchQueue.global().async(group: dispatchGroup) {
+                        completion(news.response.items, news.response.groups, news.response.profiles)
+                    }
                 } catch {
                     print(error)
                 }
         }
     }
-    
+   
    
 }
