@@ -30,7 +30,7 @@ class NewsHeaderView: UITableViewHeaderFooterView {
         if source.group == nil {
             nameLabel.text = (source.profile?.firstName ?? "") + " " + (source.profile?.lastName ?? "")
 
-            if let url = URL(string: source.profile!.photo) {
+            if let url = URL(string: source.profile!.photo!) {
                 let data = try? Data(contentsOf: url)
                 imageViewAvatar.image = UIImage(data: data!)
             } else {

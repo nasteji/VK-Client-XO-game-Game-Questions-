@@ -161,7 +161,7 @@ class UserService {
     }
     
     // MARK: - News
-    func loadNews(completion: @escaping([News], [Group], [Profile]?) -> Void) {
+    func loadNews(completion: @escaping([News], [Group]?, [Profile]?) -> Void) {
 
         let path = "newsfeed.get?"
         let url = baseUrl+path

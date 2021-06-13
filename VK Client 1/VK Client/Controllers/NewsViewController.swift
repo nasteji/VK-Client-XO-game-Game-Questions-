@@ -38,18 +38,17 @@ class NewsViewController: UITableViewController {
             for index in 0...news.count - 1 {
                 var id = news[index].sourceID
 
-                switch id {
-                case 0...:
+                if id! > 0 {
                     for i in 0...profiles!.count - 1 {
                         if id == profiles?[i].id {
                             self?.source.append(SourceNews(group: nil, profile: profiles?[i]))
                         }
                     }
-                default:
-                    id.negate()
-                    for i in 0...groups.count - 1 {
-                        if id == groups[i].id {
-                            self?.source.append(SourceNews(group: groups[i], profile: nil))
+                } else {
+                    id!.negate()
+                    for i in 0...groups!.count - 1 {
+                        if id == groups![i].id {
+                            self?.source.append(SourceNews(group: groups![i], profile: nil))
                         }
                     }
                 }

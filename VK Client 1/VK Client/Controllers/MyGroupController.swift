@@ -8,25 +8,64 @@
 import UIKit
 import RealmSwift
 import FirebaseFirestore
+import Alamofire
 
-class MyGroupController: UITableViewController {
+class MyGroupController: UITableViewController, RealmController {
     
     var myGroups: [Group] = []
     
     var token = NotificationToken()
+    
+    private let operationQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.name = "com.AsyncOperation.MyGroupController"
+        operationQueue.qualityOfService = .utility
+        return operationQueue
+    }()
 
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        userService.loadGroups() { [weak self] in
-            self?.readData()
-            self?.loadData()
-        }
+        let url = "https://api.vk.com/method/groups.get"
+        let parameters: Parameters = [
+            "user_ids": user.userId,
+            "access_token": user.token,
+            "extended": 1,
+            "v": "5.21"
+        ]
+        
+        let request =  Alamofire.request(url, method: .get, parameters: parameters)
+        let getData = GetDataOperation(request: request)
+        let parseData = DataParseOperation()
+        let reloadTableController = ReloadTableController(controller: self)
+        
+        parseData.addDependency(getData)
+        reloadTableController.addDependency(parseData)
+        
+        operationQueue.addOperation(getData)
+        operationQueue.addOperation(parseData)
+        OperationQueue.main.addOperation(reloadTableController)
         
         tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: ListCell.reuseID)
+    }
+    
+    // MARK: - Save Groups Data
+    
+    func saveGroupsData(groups: [Group]) {
+        do {
+            let realm = try Realm()
+            
+            let oldGroups = realm.objects(Group.self)
+            realm.beginWrite()
+            realm.delete(oldGroups)
+
+            realm.add(groups)
+            try realm.commitWrite()
+        } catch {
+            print(error)
+        }
     }
     
     // MARK: - Load and Read Data
@@ -141,7 +180,5 @@ class MyGroupController: UITableViewController {
         }
     }
     
-    
    
-    
 }
