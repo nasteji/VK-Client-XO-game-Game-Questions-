@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -88,36 +87,7 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="FriendsFotoCell" id="Y0g-Eh-KZa" customClass="FriendsFotoCell" customModule="VK_Client" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="10" width="180" height="150"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xcB-km-GcN">
-                                            <rect key="frame" x="0.0" y="0.0" width="180" height="150"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="873-pU-ep5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="130" id="USt-KB-EcQ"/>
-                                                        <constraint firstAttribute="height" constant="130" id="noX-mO-s2n"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="873-pU-ep5" secondAttribute="bottom" constant="20" id="eHP-Lw-48X"/>
-                                                <constraint firstItem="873-pU-ep5" firstAttribute="top" secondItem="xcB-km-GcN" secondAttribute="top" id="lzy-jy-Epn"/>
-                                                <constraint firstItem="873-pU-ep5" firstAttribute="leading" secondItem="xcB-km-GcN" secondAttribute="leading" id="wJY-ML-KKK"/>
-                                                <constraint firstAttribute="trailing" secondItem="873-pU-ep5" secondAttribute="trailing" constant="50" id="xbg-pH-bgr"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="180" height="150"/>
-                                        <connections>
-                                            <outlet property="friendImage" destination="873-pU-ep5" id="2zi-Fc-Jpp"/>
-                                            <segue destination="6bE-pw-DNe" kind="show" id="DnQ-b7-kjZ"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="vCo-Zz-VuQ" id="IXf-7f-m54"/>
                                     <outlet property="delegate" destination="vCo-Zz-VuQ" id="HaS-jL-X3K"/>
@@ -151,7 +121,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W6C-Il-fqv">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Kj1-Ik-wvv"/>

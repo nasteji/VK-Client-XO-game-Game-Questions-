@@ -12,6 +12,8 @@ class SearchGroupController: UITableViewController, UISearchBarDelegate {
     
     var filteredGroups: [Group] = []
     
+    let userService = UserService()
+    
     @IBOutlet weak var searchBar: UISearchBar!
     
     // MARK: - Life Cycle

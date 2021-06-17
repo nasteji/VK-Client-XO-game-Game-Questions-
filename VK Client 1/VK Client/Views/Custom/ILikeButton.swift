@@ -9,16 +9,19 @@ import UIKit
 
 @IBDesignable
 class ILikeButton: UIControl {
-
+    
     var button: UIButton!
+    var countLikes: Int?
     
     var isOn: Bool = false {
         didSet {
             if isOn {
+                button.setTitle(String(countLikes ?? 0), for: .normal)
                 button.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
                 button.tintColor = tintColorOnTap
                 button.setTitleColor(titleColorOnTap, for: .normal)
             } else {
+                button.setTitle(String(countLikes ?? 0), for: .normal)
                 button.setTitleColor(titleColorBegin, for: .normal)
                 button.setImage(UIImage(systemName: "suit.heart"), for: .normal)
                 button.tintColor = tintColorBegin
@@ -54,12 +57,9 @@ class ILikeButton: UIControl {
     }
     private func setup() {
         button = UIButton(type: .custom)
-        
-        button.setTitle("0", for: .normal)
         button.setTitleColor(titleColorBegin, for: .normal)
         button.setImage(UIImage(systemName: "suit.heart"), for: .normal)
         button.tintColor = tintColorBegin
-
         
         addSubview(button)
         
@@ -68,6 +68,7 @@ class ILikeButton: UIControl {
     
     @objc private func buttonTapped(_ sender: UIButton) {
         
+        isOn ? (countLikes! -= 1) : (countLikes! += 1)
         isOn.toggle()
         
         UIView.animate(withDuration: 2, delay: 0, options: [], animations: {

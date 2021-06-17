@@ -8,10 +8,9 @@
 import UIKit
 import WebKit
 
-let user = Session.shared
-let userService = UserService()
-
 class LoginFormController: LoadingViewController {
+    
+    let user = Session.shared
     
     @IBOutlet weak var webView: WKWebView! {
         didSet{
@@ -47,7 +46,7 @@ class LoginFormController: LoadingViewController {
 
 }
 
-// MARK: - WKNavigationDelegate
+// MARK: - WK-Navigation Delegate
 
 extension LoginFormController: WKNavigationDelegate {
 
@@ -56,7 +55,8 @@ extension LoginFormController: WKNavigationDelegate {
               let fragment = url.fragment
         else {
             decisionHandler(.allow)
-            return }
+            return
+        }
 
         let params = fragment
         .components(separatedBy: "&")

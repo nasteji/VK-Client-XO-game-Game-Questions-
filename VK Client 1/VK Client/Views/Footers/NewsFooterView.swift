@@ -26,9 +26,9 @@ class NewsFooterView: UITableViewHeaderFooterView {
 
     func configure(news: News) {
 
-        if news.likes?.userLikes == 1 {
-            likeControl.isOn = true
-        }
+        likeControl.isOn = news.likes?.userLikes == 1 ? true : false
+        
+        likeControl.countLikes = news.likes?.count ?? 0
         likeControl.button.setTitle(String(news.likes?.count ?? 0), for: .normal)
         
         repostButton.setTitle(String(news.reposts?.count ?? 0), for: .normal)

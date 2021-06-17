@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pF-QW-b4O">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                    <rect key="frame" x="0.0" y="1" width="414" height="49"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nuE-Tq-sCU" customClass="AvatarView" customModule="VK_Client" customModuleProvider="target">
@@ -26,8 +26,8 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjv-mq-ids">
-                    <rect key="frame" x="64" y="15" width="42.5" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <rect key="frame" x="64" y="14.5" width="45" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -43,7 +43,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9pF-QW-b4O" secondAttribute="trailing" id="3vx-Iy-3J7"/>
                 <constraint firstItem="9pF-QW-b4O" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="BPZ-Iy-gGU"/>
                 <constraint firstItem="jRT-QM-KfD" firstAttribute="bottom" secondItem="nuE-Tq-sCU" secondAttribute="bottom" id="C4T-fz-cTw"/>
-                <constraint firstItem="9pF-QW-b4O" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="M47-a8-mYy"/>
+                <constraint firstItem="9pF-QW-b4O" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="1" id="M47-a8-mYy"/>
                 <constraint firstItem="Tjv-mq-ids" firstAttribute="centerY" secondItem="nuE-Tq-sCU" secondAttribute="centerY" id="M60-lg-GYh"/>
                 <constraint firstItem="nuE-Tq-sCU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="USZ-hT-agA"/>
                 <constraint firstItem="nuE-Tq-sCU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="2" id="d1w-mT-r92"/>

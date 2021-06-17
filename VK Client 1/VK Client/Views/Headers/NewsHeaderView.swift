@@ -23,28 +23,16 @@ class NewsHeaderView: UITableViewHeaderFooterView {
         viewColor.alpha = opacity
     }
     
-    func configure(news: News, source: SourceNews) {
-        
-        dateLabel.text = news.date!.unixTime()
-        
-        if source.group == nil {
-            nameLabel.text = (source.profile?.firstName ?? "") + " " + (source.profile?.lastName ?? "")
+    func configure(news: News) {
+        dateLabel.text = news.date!.convertFromUnixTime()
+        nameLabel.text = news.sourceName
 
-            if let url = URL(string: source.profile!.photo!) {
-                let data = try? Data(contentsOf: url)
-                imageViewAvatar.image = UIImage(data: data!)
-            } else {
-                imageViewAvatar.image = UIImage(systemName: "person.fill")
-            }
+        if let photo = news.sourcePhoto {
+            let url = URL(string: photo)!
+            let data = try? Data(contentsOf: url)
+            imageViewAvatar.image = UIImage(data: data!)
         } else {
-            nameLabel.text = source.group?.name
-            
-            if let url = URL(string: source.group!.photo) {
-                let data = try? Data(contentsOf: url)
-                imageViewAvatar.image = UIImage(data: data!)
-            } else {
-                imageViewAvatar.image = UIImage(systemName: "person.3.fill")
-            }
+            imageViewAvatar.image = UIImage(systemName: "person.fill")
         }
     }
     

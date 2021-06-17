@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class FriendsFotoController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class FriendsFotoController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
 
@@ -17,19 +17,22 @@ class FriendsFotoController: UIViewController, UICollectionViewDelegate, UIColle
     var friendGallery: [Photo] = []
     
     var token = NotificationToken()
+    let userService = UserService()
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = friendName
         
+        title = friendName
         collectionView.delegate = self
         
         userService.loadUserPhotos(id: id) { [weak self] in
             self?.loadData()
             self?.readData()
         }
+        
+        collectionView.register(UINib(nibName: "FriendsFotoCell", bundle: nil), forCellWithReuseIdentifier: FriendsFotoCell.reuseId)
     }
     
     // MARK: - Load and Read Data
@@ -67,30 +70,24 @@ class FriendsFotoController: UIViewController, UICollectionViewDelegate, UIColle
         }
     }
     
-    // MARK: -  UICollectionView
+    // MARK: -  CollectionView Data Source
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return friendGallery.count
     }
 
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendsFotoCell", for: indexPath) as! FriendsFotoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendsFotoCell.reuseId, for: indexPath) as! FriendsFotoCell
     
-        if let photo = friendGallery[indexPath.row].photo604 {
-            let url = URL(string: photo)!
-            let data = try? Data(contentsOf: url)
-            cell.friendImage.image = UIImage(data: data!)
-        } else {
-            cell.friendImage.image = UIImage(systemName: "person.fill")
-        }
-
-        let button = ILikeButton(frame: CGRect(x: 112, y: 128, width: 60, height: 20))
-        
-        button.button.setTitle(String(friendGallery[indexPath.row].likes?.count ?? 0), for: .normal)
-   
-        cell.addSubview(button)
+        cell.configure(photo: friendGallery[indexPath.row])
     
         return cell
+    }
+    
+    // MARK: - CollectionView Layout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width/3, height: UIScreen.main.bounds.width/3)
     }
     
     // MARK: - Segues

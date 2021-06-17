@@ -11,7 +11,9 @@ import RealmSwift
 class NewsViewController: UITableViewController {
 
     var news: [News] = []
-    var source: [SourceNews] = []
+    let userService = UserService()
+  
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,34 +32,14 @@ class NewsViewController: UITableViewController {
     // MARK: - Load Data
     
     func loadData() {
-            
         userService.loadNews() { [weak self] news, groups, profiles in
-                
             self?.news = news
-
-            for index in 0...news.count - 1 {
-                var id = news[index].sourceID
-
-                if id! > 0 {
-                    for i in 0...profiles!.count - 1 {
-                        if id == profiles?[i].id {
-                            self?.source.append(SourceNews(group: nil, profile: profiles?[i]))
-                        }
-                    }
-                } else {
-                    id!.negate()
-                    for i in 0...groups!.count - 1 {
-                        if id == groups![i].id {
-                            self?.source.append(SourceNews(group: groups![i], profile: nil))
-                        }
-                    }
-                }
-            }
+            
+            let dispatchGroup = DispatchGroup()
             dispatchGroup.notify(queue: DispatchQueue.main) {
                 self?.tableView.reloadData()
             }
         }
-       
     }
     
     // MARK: - Footer
@@ -85,7 +67,7 @@ class NewsViewController: UITableViewController {
         else { return nil }
 
         headerView.color(color: tableView.backgroundColor!, opacity: 1)
-        headerView.configure(news: news[section], source: source[section])
+        headerView.configure(news: news[section])
         
         return headerView
     }
@@ -127,6 +109,7 @@ class NewsViewController: UITableViewController {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsTextCell.reuseId, for: indexPath) as! NewsTextCell
             cell.configure(news: news)
+            cell.color(color: tableView.backgroundColor!, opacity: 1)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell

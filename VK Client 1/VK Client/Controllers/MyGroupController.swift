@@ -15,6 +15,7 @@ class MyGroupController: UITableViewController, RealmController {
     var myGroups: [Group] = []
     
     var token = NotificationToken()
+    let user = Session.shared
     
     private let operationQueue: OperationQueue = {
         let operationQueue = OperationQueue()

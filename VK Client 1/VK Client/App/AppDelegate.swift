@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        var config = Realm.Configuration()
-        config.deleteRealmIfMigrationNeeded = true
-        Realm.Configuration.defaultConfiguration = config
+//        var config = Realm.Configuration()
+//        config.deleteRealmIfMigrationNeeded = true
+//        Realm.Configuration.defaultConfiguration = config
         
         return true
     }

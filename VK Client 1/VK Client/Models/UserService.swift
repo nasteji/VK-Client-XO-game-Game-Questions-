@@ -8,11 +8,11 @@
 import Foundation
 import Alamofire
 import RealmSwift
-
-let dispatchGroup = DispatchGroup()
+import PromiseKit
 
 class UserService {
     
+    let user = Session.shared
     let baseUrl = "https://api.vk.com/method/"
     let version = "5.21"
     
@@ -176,10 +176,28 @@ class UserService {
         Alamofire.request(url, method: .get, parameters: parameters).responseData { response in
             guard let data = response.value else { return }
                 do {
-                    let news = try JSONDecoder().decode(NewsList.self, from: data)
+                    let newsList = try JSONDecoder().decode(NewsList.self, from: data)
+                    var news = newsList.response.items
+                    let groups = newsList.response.groups
+                    let profiles = newsList.response.profiles
                     
+                    for index in 0..<news.count {
+                        var id = news[index].sourceID
+                        if id! > 0 {
+                            let profile = profiles?.first(where: { $0.id == id })
+                            news[index].sourceName = profile?.name
+                            news[index].sourcePhoto = profile?.photo
+                        } else {
+                            id!.negate()
+                            let group = groups?.first(where: { $0.id == id })
+                            news[index].sourceName = group?.name
+                            news[index].sourcePhoto = group?.photo
+                        }
+                    }
+                    
+                    let dispatchGroup = DispatchGroup()
                     DispatchQueue.global().async(group: dispatchGroup) {
-                        completion(news.response.items, news.response.groups, news.response.profiles)
+                        completion(news, groups, profiles)
                     }
                 } catch {
                     print(error)

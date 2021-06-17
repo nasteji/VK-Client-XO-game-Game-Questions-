@@ -32,11 +32,13 @@ struct News: Codable {
     let reposts: Reposts?
     let type: String?
     let postType: String?
-    let date: Date?
+    let date: Double?
     let sourceID: Int?
     let text: String?
     let attachments: [Attachment]?
     let postID: Int?
+    var sourceName: String?
+    var sourcePhoto: String?
 
     enum CodingKeys: String, CodingKey {
         case comments, type, likes, reposts
@@ -46,6 +48,7 @@ struct News: Codable {
         case text
         case attachments
         case postID = "post_id"
+        case sourceName, sourcePhoto
     }
 }
 
@@ -116,6 +119,13 @@ struct Profile: Codable {
     let lastName: String?
     let sex: Int?
     let screenName, firstName: String?
+    var name: String? {
+        if firstName == "" && lastName == "" {
+            return "No name"
+        } else {
+            return (firstName ?? "") + " " + (lastName ?? "")
+        }
+    }
 
     enum CodingKeys: String, CodingKey {
         case online, id

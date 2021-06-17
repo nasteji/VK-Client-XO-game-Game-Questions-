@@ -17,6 +17,7 @@ class MyFriendsViewController: UITableViewController {
     var objectArray = [Objects]()
     
     var token = NotificationToken()
+    let userService = UserService()
     
     // MARK: - Life Cycle
     
