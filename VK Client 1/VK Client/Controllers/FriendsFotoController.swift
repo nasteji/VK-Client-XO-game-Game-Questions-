@@ -27,46 +27,23 @@ class FriendsFotoController: UIViewController, UICollectionViewDelegate, UIColle
         title = friendName
         collectionView.delegate = self
         
-        userService.loadUserPhotos(id: id) { [weak self] in
+         userService.loadUserPhotos(id: id) { [weak self] in
             self?.loadData()
-            self?.readData()
         }
         
         collectionView.register(UINib(nibName: "FriendsFotoCell", bundle: nil), forCellWithReuseIdentifier: FriendsFotoCell.reuseId)
     }
     
-    // MARK: - Load and Read Data
+    // MARK: - Load Data
     
     func loadData() {
         do {
             let realm = try Realm()
             let photos = realm.objects(Photo.self)
             self.friendGallery = Array(photos)
+            collectionView.reloadData()
         } catch {
             print(error)
-        }
-    }
-    
-    func readData() {
-        guard let realm = try? Realm() else { return }
-        let photos = realm.objects(Photo.self)
-        token = photos.observe { changes in
-            guard let collectionView = self.collectionView else { return }
-            
-            switch changes {
-            case .initial:
-                collectionView.reloadData()
-                print("Start to modified Photos")
-            case .update(let results, deletions: let deletions, insertions: let insertions, modifications: let modifications):
-                collectionView.performBatchUpdates({
-                    collectionView.insertItems(at: insertions.map({ IndexPath(row: $0, section: 0) }))
-                    collectionView.deleteItems(at: deletions.map({ IndexPath(row: $0, section: 0) }))
-                    collectionView.reloadItems(at: modifications.map({ IndexPath(row: $0, section: 0) }))
-                }, completion: nil)
-                print("Photos were modified: \(results)")
-            case .error(let error):
-                print("Error: \(error.localizedDescription)")
-            }
         }
     }
     
@@ -91,6 +68,10 @@ class FriendsFotoController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     // MARK: - Segues
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "SegueToFullScreenPhotoViewController", sender: nil)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? FullScreenPhotoViewController {

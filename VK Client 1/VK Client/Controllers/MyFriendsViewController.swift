@@ -17,17 +17,14 @@ class MyFriendsViewController: UITableViewController {
     var objectArray = [Objects]()
     
     var token = NotificationToken()
-    let userService = UserService()
+    let service = PromiseService()
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userService.loadFriends() { [weak self] in
-            self?.loadData()
-            self?.readData()
-        }
+        loadFriends()
         
         tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: ListCell.reuseID)
 
@@ -35,6 +32,24 @@ class MyFriendsViewController: UITableViewController {
         tableView.register(headerNib, forHeaderFooterViewReuseIdentifier: CustomHeaderView.reuseID)
     }
 
+    // MARK: - Service
+    
+    func loadFriends() {
+        service.getUrl()
+            .get({ url in
+                print("url")
+            })
+            .then(on: DispatchQueue.global(), service.getData(_:))
+            .then(service.getParsedData(_:))
+            .done(on: DispatchQueue.main) { users in
+                self.loadData()
+                self.readData()
+            }
+            .catch { error in
+                print(error)
+            }
+    }
+    
     // MARK: - Load and Read Data
     
     func loadData() {

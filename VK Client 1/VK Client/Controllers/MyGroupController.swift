@@ -29,6 +29,14 @@ class MyGroupController: UITableViewController, RealmController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadGroups()
+        
+        tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: ListCell.reuseID)
+    }
+    
+    // MARK: - Service
+    
+    func loadGroups() {
         let url = "https://api.vk.com/method/groups.get"
         let parameters: Parameters = [
             "user_ids": user.userId,
@@ -48,8 +56,6 @@ class MyGroupController: UITableViewController, RealmController {
         operationQueue.addOperation(getData)
         operationQueue.addOperation(parseData)
         OperationQueue.main.addOperation(reloadTableController)
-        
-        tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: ListCell.reuseID)
     }
     
     // MARK: - Save Groups Data

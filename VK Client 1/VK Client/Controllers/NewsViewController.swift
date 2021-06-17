@@ -29,7 +29,7 @@ class NewsViewController: UITableViewController {
         tableView.register(footerNib, forHeaderFooterViewReuseIdentifier: NewsFooterView.reuseId)
     }
    
-    // MARK: - Load Data
+    // MARK: - Service
     
     func loadData() {
         userService.loadNews() { [weak self] news, groups, profiles in

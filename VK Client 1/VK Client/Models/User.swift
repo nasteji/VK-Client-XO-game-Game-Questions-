@@ -32,20 +32,8 @@ class User: Object, Codable {
         return "id"
     }
 }
-
-extension User {
+struct Objects {
     
-    static func dictionary(users: [User]) -> [String: [User]] {
-        
-        let dictionary = users.reduce(into: [String: [User]]()) {
-            result, name in
-            
-            if result["\(name.firstName.first!)"] == nil {
-                result["\(name.firstName.first!)"] = [name]
-            } else {
-                result["\(name.firstName.first!)"]!.append(name)
-            }
-        }
-        return dictionary
-    }
+    var sectionName : String
+    var sectionObjects : [User]
 }
