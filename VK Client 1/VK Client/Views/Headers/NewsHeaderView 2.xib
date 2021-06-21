@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,8 +14,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pF-QW-b4O">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="fCi-1M-aSn"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nuE-Tq-sCU" customClass="AvatarView" customModule="VK_Client" customModuleProvider="target">
                     <rect key="frame" x="2" y="4" width="42" height="42"/>
@@ -26,8 +28,8 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjv-mq-ids">
-                    <rect key="frame" x="64" y="15" width="42.5" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <rect key="frame" x="64" y="14.5" width="45" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -39,6 +41,7 @@
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9pF-QW-b4O" secondAttribute="trailing" id="3vx-Iy-3J7"/>
                 <constraint firstItem="9pF-QW-b4O" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="BPZ-Iy-gGU"/>
@@ -47,7 +50,6 @@
                 <constraint firstItem="Tjv-mq-ids" firstAttribute="centerY" secondItem="nuE-Tq-sCU" secondAttribute="centerY" id="M60-lg-GYh"/>
                 <constraint firstItem="nuE-Tq-sCU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="USZ-hT-agA"/>
                 <constraint firstItem="nuE-Tq-sCU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="2" id="d1w-mT-r92"/>
-                <constraint firstAttribute="bottom" secondItem="9pF-QW-b4O" secondAttribute="bottom" id="jVh-1z-sg5"/>
                 <constraint firstAttribute="bottom" secondItem="nuE-Tq-sCU" secondAttribute="bottom" constant="4" id="liI-O7-L5X"/>
                 <constraint firstItem="Tjv-mq-ids" firstAttribute="leading" secondItem="nuE-Tq-sCU" secondAttribute="trailing" constant="20" id="oWl-JV-GWG"/>
                 <constraint firstItem="jRT-QM-KfD" firstAttribute="leading" secondItem="Tjv-mq-ids" secondAttribute="leading" id="x1J-yF-vcw"/>
@@ -62,9 +64,4 @@
             <point key="canvasLocation" x="81" y="53"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
