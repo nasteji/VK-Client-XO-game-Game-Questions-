@@ -32,8 +32,11 @@
 		9C52F55F260B32E800298337 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52F55E260B32E800298337 /* LoadingViewController.swift */; };
 		9C52F57B260F4E8200298337 /* FullScreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C52F57A260F4E8200298337 /* FullScreenPhotoViewController.swift */; };
 		9C585F04261F2D7E0000D8C7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C585F03261F2D7E0000D8C7 /* Session.swift */; };
+<<<<<<< HEAD
 		9C5FD66C2680D84000ABD55F /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FD66B2680D84000ABD55F /* ImageService.swift */; };
 		9C5FD66E2680E19100ABD55F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5FD66D2680E19100ABD55F /* UIImageViewExtension.swift */; };
+=======
+>>>>>>> iosApplicationPerformance
 		9C6805A42603CE5F00BD91A6 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6805A32603CE5F00BD91A6 /* CustomHeaderView.swift */; };
 		9C6805A72603CE8400BD91A6 /* CustomHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C6805A62603CE8400BD91A6 /* CustomHeaderView.xib */; };
 		9C719105265A85C200DA5F9D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C719104265A85C200DA5F9D /* GoogleService-Info.plist */; };
@@ -93,8 +96,11 @@
 		9C52F55E260B32E800298337 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		9C52F57A260F4E8200298337 /* FullScreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoViewController.swift; sourceTree = "<group>"; };
 		9C585F03261F2D7E0000D8C7 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		9C5FD66B2680D84000ABD55F /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		9C5FD66D2680E19100ABD55F /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> iosApplicationPerformance
 		9C6805A32603CE5F00BD91A6 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		9C6805A62603CE8400BD91A6 /* CustomHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeaderView.xib; sourceTree = "<group>"; };
 		9C719104265A85C200DA5F9D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -289,7 +295,10 @@
 				9C8B3FDA267B6F460034B0E8 /* AppError.swift */,
 				9C235710262758C1009034B6 /* UserService.swift */,
 				9C8B3FDC267B6FA80034B0E8 /* PromiseService.swift */,
+<<<<<<< HEAD
 				9C5FD66B2680D84000ABD55F /* ImageService.swift */,
+=======
+>>>>>>> iosApplicationPerformance
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -317,7 +326,10 @@
 			isa = PBXGroup;
 			children = (
 				9C8B3FD8267B6E820034B0E8 /* UserExtension.swift */,
+<<<<<<< HEAD
 				9C5FD66D2680E19100ABD55F /* UIImageViewExtension.swift */,
+=======
+>>>>>>> iosApplicationPerformance
 				9CAA7692263540840071C9C3 /* DataExtensions.swift */,
 				9CFE88DD265FA1F400C5D965 /* DoubleExtensions.swift */,
 			);
@@ -475,7 +487,10 @@
 				9CDC303926764F9B00483B94 /* ReloadTableController.swift in Sources */,
 				9C6805A42603CE5F00BD91A6 /* CustomHeaderView.swift in Sources */,
 				9C8B3FDB267B6F460034B0E8 /* AppError.swift in Sources */,
+<<<<<<< HEAD
 				9C5FD66E2680E19100ABD55F /* UIImageViewExtension.swift in Sources */,
+=======
+>>>>>>> iosApplicationPerformance
 				9C4127C62664DFB000C0CC05 /* NewsTextCell.swift in Sources */,
 				9CF10C9425E8FEF200CED30F /* FriendsFotoController.swift in Sources */,
 				9C235711262758C1009034B6 /* UserService.swift in Sources */,
@@ -505,7 +520,10 @@
 				9CEDC2E42630765600CA49E1 /* Group.swift in Sources */,
 				9CFE88DE265FA1F400C5D965 /* DoubleExtensions.swift in Sources */,
 				9C24486F2604B33300B82CFA /* NewsViewController.swift in Sources */,
+<<<<<<< HEAD
 				9C5FD66C2680D84000ABD55F /* ImageService.swift in Sources */,
+=======
+>>>>>>> iosApplicationPerformance
 				9C04965825DFB406003D4B23 /* SceneDelegate.swift in Sources */,
 				9CAA7693263540840071C9C3 /* DataExtensions.swift in Sources */,
 				9C9C076825FBA801007CC810 /* ListCell.swift in Sources */,

@@ -11,16 +11,23 @@ import RealmSwift
 class NewsViewController: UITableViewController {
 
     var news: [News] = []
+<<<<<<< HEAD
     private var userService = UserService()
     private var imageService: ImageService?
+=======
+    let userService = UserService()
+>>>>>>> iosApplicationPerformance
   
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+<<<<<<< HEAD
         imageService = ImageService(container: tableView)
         
+=======
+>>>>>>> iosApplicationPerformance
         loadData()
        
         tableView.register(UINib(nibName: "NewsTextCell", bundle: nil), forCellReuseIdentifier: NewsTextCell.reuseId)
@@ -52,7 +59,13 @@ class NewsViewController: UITableViewController {
         guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsFooterView.reuseId) as? NewsFooterView
         else { return nil }
         
+<<<<<<< HEAD
         footerView.configure(news: news[section])
+=======
+        footerView.color(color: tableView.backgroundColor!, opacity: 1)
+        footerView.configure(news: news[section])
+        
+>>>>>>> iosApplicationPerformance
         return footerView
     }
     
@@ -66,8 +79,15 @@ class NewsViewController: UITableViewController {
 
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsHeaderView.reuseId) as? NewsHeaderView
         else { return nil }
+<<<<<<< HEAD
         
         headerView.configure(news: news[section])
+=======
+
+        headerView.color(color: tableView.backgroundColor!, opacity: 1)
+        headerView.configure(news: news[section])
+        
+>>>>>>> iosApplicationPerformance
         return headerView
     }
     
@@ -77,6 +97,7 @@ class NewsViewController: UITableViewController {
     
     // MARK: - Table view data source
     
+<<<<<<< HEAD
     override func numberOfSections(in tableView: UITableView) -> Int {
         return news.count
     }
@@ -85,6 +106,17 @@ class NewsViewController: UITableViewController {
         return 3
     }
    
+=======
+    //кол-во секций в таблице
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return news.count
+    }
+    //кол-во строк в секции
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    //высота ячеек
+>>>>>>> iosApplicationPerformance
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let news = news[indexPath.section]
@@ -111,12 +143,16 @@ class NewsViewController: UITableViewController {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
+<<<<<<< HEAD
             
             guard let urlImage = news.attachments?.first?.photo?.photo604
             else { return UITableViewCell() }
             
             let image = imageService?.photo(atIndexpath: indexPath, byUrl: urlImage)
             cell.configure(image: image)
+=======
+            cell.configure(news: news)
+>>>>>>> iosApplicationPerformance
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell

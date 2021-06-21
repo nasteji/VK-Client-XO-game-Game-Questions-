@@ -278,10 +278,17 @@
         <scene sceneID="EJz-XV-yXi">
             <objects>
                 <tableViewController id="SEd-fy-Fre" customClass="NewsViewController" customModule="VK_Client" customModuleProvider="target" sceneMemberID="viewController">
+<<<<<<< HEAD
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="JEk-aU-8eo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.63351825120000005" green="0.5473172838" blue="0.6976734671" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+=======
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="JEk-aU-8eo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.74808412000000002" green="0.64629451130000004" blue="0.82384120849999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+>>>>>>> iosApplicationPerformance
                         <connections>
                             <outlet property="dataSource" destination="SEd-fy-Fre" id="NYO-rf-vRL"/>
                             <outlet property="delegate" destination="SEd-fy-Fre" id="5Oa-ZS-eKj"/>

@@ -12,10 +12,24 @@ class NewsFooterView: UITableViewHeaderFooterView {
     static let reuseId = "NewsFooterView"
     static var height: CGFloat = 35
     
+<<<<<<< HEAD
+=======
+    @IBOutlet weak var viewColor: UIView!
+    
+>>>>>>> iosApplicationPerformance
     @IBOutlet weak var likeControl: ILikeButton!
     @IBOutlet weak var repostButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
 
+<<<<<<< HEAD
+=======
+    func color(color: UIColor, opacity: CGFloat) {
+        print(color)
+        viewColor.backgroundColor = color
+        viewColor.alpha = opacity
+    }
+
+>>>>>>> iosApplicationPerformance
     func configure(news: News) {
 
         likeControl.isOn = news.likes?.userLikes == 1 ? true : false

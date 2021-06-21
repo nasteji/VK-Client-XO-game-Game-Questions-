@@ -36,6 +36,12 @@ class MyFriendsViewController: UITableViewController {
     
     func loadFriends() {
         service.getUrl()
+<<<<<<< HEAD
+=======
+            .get({ url in
+                print("url")
+            })
+>>>>>>> iosApplicationPerformance
             .then(on: DispatchQueue.global(), service.getData(_:))
             .then(service.getParsedData(_:))
             .done(on: DispatchQueue.main) { users in

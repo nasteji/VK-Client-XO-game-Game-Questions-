@@ -15,9 +15,25 @@ class NewsPhotoCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+<<<<<<< HEAD
     }
     
     func configure(image: UIImage?) {
         imageNewsView.image = image
     }
+=======
+       
+    }
+
+    func configure(news: News) {
+        guard let photo = news.attachments?.first?.photo?.photo604 else {
+            return
+        }
+        let url = URL(string: photo)
+        let data = try? Data(contentsOf: url!)
+        imageNewsView.image = UIImage(data: data!)
+    }
+
+    
+>>>>>>> iosApplicationPerformance
 }
