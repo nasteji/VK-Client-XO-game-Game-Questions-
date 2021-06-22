@@ -36,9 +36,6 @@ class MyFriendsViewController: UITableViewController {
     
     func loadFriends() {
         service.getUrl()
-            .get({ url in
-                print("url")
-            })
             .then(on: DispatchQueue.global(), service.getData(_:))
             .then(service.getParsedData(_:))
             .done(on: DispatchQueue.main) { users in

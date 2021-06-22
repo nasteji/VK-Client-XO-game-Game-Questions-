@@ -18,14 +18,8 @@ class NewsPhotoCell: UITableViewCell {
        
     }
 
-    func configure(news: News) {
-        guard let photo = news.attachments?.first?.photo?.photo604 else {
-            return
+    func configure(image: UIImage?) {
+            imageNewsView.image = image
         }
-        let url = URL(string: photo)
-        let data = try? Data(contentsOf: url!)
-        imageNewsView.image = UIImage(data: data!)
-    }
-
     
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9C008A322607B5AF000B762C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C008A312607B5AF000B762C /* LoadingView.swift */; };
+		9C02E9FB2680FD6600CC90CE /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C02E9FA2680FD6600CC90CE /* UIImageViewExtensions.swift */; };
+		9C02E9FD2680FDB300CC90CE /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C02E9FC2680FDB300CC90CE /* ImageService.swift */; };
 		9C04965625DFB406003D4B23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04965525DFB406003D4B23 /* AppDelegate.swift */; };
 		9C04965825DFB406003D4B23 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04965725DFB406003D4B23 /* SceneDelegate.swift */; };
 		9C04965D25DFB406003D4B23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C04965B25DFB406003D4B23 /* Main.storyboard */; };
@@ -65,6 +67,8 @@
 		7591D58F2764CC84EBBE2E3D /* Pods-VK Client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK Client.release.xcconfig"; path = "Target Support Files/Pods-VK Client/Pods-VK Client.release.xcconfig"; sourceTree = "<group>"; };
 		9096DDDF01D3EC05467F20EC /* Pods-VK Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VK Client.debug.xcconfig"; path = "Target Support Files/Pods-VK Client/Pods-VK Client.debug.xcconfig"; sourceTree = "<group>"; };
 		9C008A312607B5AF000B762C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		9C02E9FA2680FD6600CC90CE /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
+		9C02E9FC2680FDB300CC90CE /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		9C04965225DFB406003D4B23 /* VK Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VK Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C04965525DFB406003D4B23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C04965725DFB406003D4B23 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				9C8B3FDA267B6F460034B0E8 /* AppError.swift */,
 				9C235710262758C1009034B6 /* UserService.swift */,
 				9C8B3FDC267B6FA80034B0E8 /* PromiseService.swift */,
+				9C02E9FC2680FDB300CC90CE /* ImageService.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				9C8B3FD8267B6E820034B0E8 /* UserExtension.swift */,
+				9C02E9FA2680FD6600CC90CE /* UIImageViewExtensions.swift */,
 				9CAA7692263540840071C9C3 /* DataExtensions.swift */,
 				9CFE88DD265FA1F400C5D965 /* DoubleExtensions.swift */,
 			);
@@ -479,10 +485,12 @@
 				9CDC303726764BA400483B94 /* DataParseOperation.swift in Sources */,
 				9C46414A25F4BDA8004851E2 /* AvatarView.swift in Sources */,
 				9C8477A725E8D68100FBEEB6 /* MyFriendsViewController.swift in Sources */,
+				9C02E9FD2680FDB300CC90CE /* ImageService.swift in Sources */,
 				9C4127BB2664DB6D00C0CC05 /* NewsHeaderView.swift in Sources */,
 				9C8B3FD9267B6E820034B0E8 /* UserExtension.swift in Sources */,
 				9C23CE502614BCF300F5A37D /* Animator.swift in Sources */,
 				9C36B08C261576DA001EB6BD /* CustomInteractiveTransition.swift in Sources */,
+				9C02E9FB2680FD6600CC90CE /* UIImageViewExtensions.swift in Sources */,
 				9C12B12C2678D1A9001FD950 /* FriendsFotoCell.swift in Sources */,
 				9C04967425DFC810003D4B23 /* LoginFormController.swift in Sources */,
 				9C008A322607B5AF000B762C /* LoadingView.swift in Sources */,

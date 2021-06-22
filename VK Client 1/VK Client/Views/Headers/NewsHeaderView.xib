@@ -15,8 +15,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pF-QW-b4O">
-                    <rect key="frame" x="0.0" y="1" width="414" height="49"/>
+                    <rect key="frame" x="0.0" y="1" width="414" height="1"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="wt3-2p-F70"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nuE-Tq-sCU" customClass="AvatarView" customModule="VK_Client" customModuleProvider="target">
                     <rect key="frame" x="2" y="4" width="42" height="42"/>
@@ -47,7 +50,6 @@
                 <constraint firstItem="Tjv-mq-ids" firstAttribute="centerY" secondItem="nuE-Tq-sCU" secondAttribute="centerY" id="M60-lg-GYh"/>
                 <constraint firstItem="nuE-Tq-sCU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="USZ-hT-agA"/>
                 <constraint firstItem="nuE-Tq-sCU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="2" id="d1w-mT-r92"/>
-                <constraint firstAttribute="bottom" secondItem="9pF-QW-b4O" secondAttribute="bottom" id="jVh-1z-sg5"/>
                 <constraint firstAttribute="bottom" secondItem="nuE-Tq-sCU" secondAttribute="bottom" constant="4" id="liI-O7-L5X"/>
                 <constraint firstItem="Tjv-mq-ids" firstAttribute="leading" secondItem="nuE-Tq-sCU" secondAttribute="trailing" constant="20" id="oWl-JV-GWG"/>
                 <constraint firstItem="jRT-QM-KfD" firstAttribute="leading" secondItem="Tjv-mq-ids" secondAttribute="leading" id="x1J-yF-vcw"/>

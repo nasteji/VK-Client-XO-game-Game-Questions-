@@ -14,10 +14,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sej-PK-g0K">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="17p-PN-roR">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
                     <subviews>
@@ -40,6 +36,7 @@
                             </state>
                         </button>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="XIA-Au-0jI"/>
                     </constraints>
@@ -50,18 +47,13 @@
             <constraints>
                 <constraint firstItem="17p-PN-roR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0Td-sJ-hIf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="17p-PN-roR" secondAttribute="bottom" id="78z-Lj-xGK"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="sej-PK-g0K" secondAttribute="bottom" constant="1" id="IP3-Pa-iBv"/>
-                <constraint firstItem="sej-PK-g0K" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="SXi-v6-vVH"/>
                 <constraint firstAttribute="trailing" secondItem="17p-PN-roR" secondAttribute="trailing" id="VeX-o8-BKP"/>
-                <constraint firstItem="sej-PK-g0K" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="c9u-Gc-j0Q"/>
-                <constraint firstItem="sej-PK-g0K" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="pRr-kl-ELv"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="commentButton" destination="bt0-Bn-5y6" id="wnU-5r-CbV"/>
                 <outlet property="likeControl" destination="ueu-KX-mPu" id="My5-Jw-Ice"/>
                 <outlet property="repostButton" destination="sfs-qu-MuG" id="ZqU-W4-abg"/>
-                <outlet property="viewColor" destination="sej-PK-g0K" id="CiM-vm-4WH"/>
             </connections>
             <point key="canvasLocation" x="58" y="60"/>
         </view>

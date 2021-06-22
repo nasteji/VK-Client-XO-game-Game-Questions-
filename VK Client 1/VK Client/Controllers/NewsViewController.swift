@@ -11,12 +11,15 @@ import RealmSwift
 class NewsViewController: UITableViewController {
 
     var news: [News] = []
-    let userService = UserService()
+    private var userService = UserService()
+    private var imageService: ImageService?
   
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imageService = ImageService(container: tableView)
         
         loadData()
        
@@ -49,9 +52,7 @@ class NewsViewController: UITableViewController {
         guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsFooterView.reuseId) as? NewsFooterView
         else { return nil }
         
-        footerView.color(color: tableView.backgroundColor!, opacity: 1)
         footerView.configure(news: news[section])
-        
         return footerView
     }
     
@@ -66,9 +67,7 @@ class NewsViewController: UITableViewController {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsHeaderView.reuseId) as? NewsHeaderView
         else { return nil }
 
-        headerView.color(color: tableView.backgroundColor!, opacity: 1)
         headerView.configure(news: news[section])
-        
         return headerView
     }
     
@@ -113,7 +112,12 @@ class NewsViewController: UITableViewController {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
-            cell.configure(news: news)
+            
+            guard let urlImage = news.attachments?.first?.photo?.photo604
+            else { return UITableViewCell() }
+
+            let image = imageService?.photo(atIndexpath: indexPath, byUrl: urlImage)
+            cell.configure(image: image)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
