@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+а
 final class Session {
     
     static let shared = Session()
