@@ -22,7 +22,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcX-Ok-ePs">
-                        <rect key="frame" x="2" y="0.0" width="318" height="25"/>
+                        <rect key="frame" x="2" y="0.0" width="316" height="25"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -30,7 +30,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="wcX-Ok-ePs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="6mF-dG-4G8"/>
-                    <constraint firstAttribute="trailing" secondItem="wcX-Ok-ePs" secondAttribute="trailing" id="DKQ-cC-L08"/>
+                    <constraint firstAttribute="trailing" secondItem="wcX-Ok-ePs" secondAttribute="trailing" constant="2" id="DKQ-cC-L08"/>
                     <constraint firstItem="JPe-Vj-iEC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GUV-XB-dK2"/>
                     <constraint firstItem="JPe-Vj-iEC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="WPC-qf-SpG"/>
                     <constraint firstItem="wcX-Ok-ePs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kYW-Ve-uyl"/>

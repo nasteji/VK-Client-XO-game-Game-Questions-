@@ -59,7 +59,7 @@
 		9CF10C9425E8FEF200CED30F /* FriendsFotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF10C9325E8FEF200CED30F /* FriendsFotoController.swift */; };
 		9CF55D7725E9237E00C971D8 /* MyGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF55D7625E9237E00C971D8 /* MyGroupController.swift */; };
 		9CF55D7D25E9287700C971D8 /* SearchGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF55D7C25E9287700C971D8 /* SearchGroupController.swift */; };
-		9CFE88DE265FA1F400C5D965 /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFE88DD265FA1F400C5D965 /* DoubleExtensions.swift */; };
+		9CFA8AC3268875CA009FE2F1 /* LoginFormControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFA8AC2268875CA009FE2F1 /* LoginFormControllerExtensions.swift */; };
 		B1DBB9762E2B4491C743635C /* Pods_VK_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D554F895492A9CB861F1B9 /* Pods_VK_Client.framework */; };
 /* End PBXBuildFile section */
 
@@ -119,7 +119,7 @@
 		9CF10C9325E8FEF200CED30F /* FriendsFotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsFotoController.swift; sourceTree = "<group>"; };
 		9CF55D7625E9237E00C971D8 /* MyGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupController.swift; sourceTree = "<group>"; };
 		9CF55D7C25E9287700C971D8 /* SearchGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroupController.swift; sourceTree = "<group>"; };
-		9CFE88DD265FA1F400C5D965 /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
+		9CFA8AC2268875CA009FE2F1 /* LoginFormControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFormControllerExtensions.swift; sourceTree = "<group>"; };
 		B4D554F895492A9CB861F1B9 /* Pods_VK_Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VK_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -176,8 +176,6 @@
 			children = (
 				9C04966325DFB406003D4B23 /* Info.plist */,
 				9C8477A125E8D51B00FBEEB6 /* App */,
-				9CDC30312676473A00483B94 /* Operation */,
-				9C8B3FD7267B6DD40034B0E8 /* ServiceLayer */,
 				9C8477A225E8D52D00FBEEB6 /* Models */,
 				9C84779F25E8D4FA00FBEEB6 /* Views */,
 				9C8477A325E8D57D00FBEEB6 /* Controllers */,
@@ -237,6 +235,7 @@
 		9C8477A225E8D52D00FBEEB6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9C8B3FD7267B6DD40034B0E8 /* ServiceLayer */,
 				9CB5F6362629F2D700016CFF /* User.swift */,
 				9CB5F63A2629F2E300016CFF /* Photo.swift */,
 				9CEDC2E32630765600CA49E1 /* Group.swift */,
@@ -285,10 +284,11 @@
 		9C8B3FD7267B6DD40034B0E8 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
+				9CDC30312676473A00483B94 /* Operation */,
 				9C585F03261F2D7E0000D8C7 /* Session.swift */,
-				9C8B3FDA267B6F460034B0E8 /* AppError.swift */,
 				9C235710262758C1009034B6 /* UserService.swift */,
 				9C8B3FDC267B6FA80034B0E8 /* PromiseService.swift */,
+				9C8B3FDA267B6F460034B0E8 /* AppError.swift */,
 				9C02E9FC2680FDB300CC90CE /* ImageService.swift */,
 			);
 			path = ServiceLayer;
@@ -317,9 +317,9 @@
 			isa = PBXGroup;
 			children = (
 				9C8B3FD8267B6E820034B0E8 /* UserExtension.swift */,
+				9CFA8AC2268875CA009FE2F1 /* LoginFormControllerExtensions.swift */,
 				9C02E9FA2680FD6600CC90CE /* UIImageViewExtensions.swift */,
 				9CAA7692263540840071C9C3 /* DataExtensions.swift */,
-				9CFE88DD265FA1F400C5D965 /* DoubleExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -504,7 +504,7 @@
 				9CDC30352676488400483B94 /* GetDataOperation.swift in Sources */,
 				9CDC303C26765F3E00483B94 /* RealmController.swift in Sources */,
 				9CEDC2E42630765600CA49E1 /* Group.swift in Sources */,
-				9CFE88DE265FA1F400C5D965 /* DoubleExtensions.swift in Sources */,
+				9CFA8AC3268875CA009FE2F1 /* LoginFormControllerExtensions.swift in Sources */,
 				9C24486F2604B33300B82CFA /* NewsViewController.swift in Sources */,
 				9C04965825DFB406003D4B23 /* SceneDelegate.swift in Sources */,
 				9CAA7693263540840071C9C3 /* DataExtensions.swift in Sources */,

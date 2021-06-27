@@ -32,7 +32,7 @@ struct News: Codable {
     let reposts: Reposts?
     let type: String?
     let postType: String?
-    let date: Double?
+    let date: Double
     let sourceID: Int?
     let text: String?
     let attachments: [Attachment]?

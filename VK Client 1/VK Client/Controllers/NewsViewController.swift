@@ -67,7 +67,7 @@ class NewsViewController: UITableViewController {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsHeaderView.reuseId) as? NewsHeaderView
         else { return nil }
 
-        headerView.configure(news: news[section])
+        headerView.configure(news: news[section], section: section)
         return headerView
     }
     
@@ -102,29 +102,34 @@ class NewsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let news = news[indexPath.section]
-        
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsTextCell.reuseId, for: indexPath) as! NewsTextCell
-            cell.configure(news: news)
-            cell.color(color: tableView.backgroundColor!, opacity: 1)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
-            
-            guard let urlImage = news.attachments?.first?.photo?.photo604
-            else { return UITableViewCell() }
-
-            let image = imageService?.photo(atIndexpath: indexPath, byUrl: urlImage)
-            cell.configure(image: image)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
             cell.imageNewsView.image = UIImage(named: "placeholder")
             return cell
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
+        let news = news[indexPath.section]
+    
+        if let cell = cell as? NewsTextCell {
+            cell.configure(news: news)
+            cell.color(color: tableView.backgroundColor!, opacity: 1)
+        }
+        if let cell = cell as? NewsPhotoCell {
+            guard let urlImage = news.attachments?.first?.photo?.photo604 else { return }
+
+            let image = imageService?.photo(atIndexpath: indexPath, byUrl: urlImage)
+            cell.configure(image: image)
+        }
     }
             
             

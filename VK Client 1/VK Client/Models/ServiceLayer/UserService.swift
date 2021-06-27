@@ -15,6 +15,8 @@ class UserService {
     let baseUrl = "https://api.vk.com/method/"
     let version = "5.21"
     
+    let dispatchGroup = DispatchGroup()
+    
     // MARK: - Friends
     func loadFriends(completion: @escaping() -> Void) {
         
@@ -193,9 +195,7 @@ class UserService {
                             news[index].sourcePhoto = group?.photo
                         }
                     }
-                    
-                    let dispatchGroup = DispatchGroup()
-                    DispatchQueue.global().async(group: dispatchGroup) {
+                    DispatchQueue.global().async(group: self.dispatchGroup) {
                         completion(news, groups, profiles)
                     }
                 } catch {
