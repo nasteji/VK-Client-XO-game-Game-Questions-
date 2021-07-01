@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - NewsList
 struct NewsList: Codable {
@@ -82,6 +83,10 @@ struct PhotoNews: Codable {
     let hasTags: Bool?
     let albumID: Int?
     let photo75: String?
+    
+    var aspectRatio: CGFloat {
+        return CGFloat(height ?? 1) / CGFloat(width ?? 1)
+    }
 
     enum CodingKeys: String, CodingKey {
         case id

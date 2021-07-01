@@ -162,7 +162,7 @@ class UserService {
     }
     
     // MARK: - News
-    func loadNews(completion: @escaping([News], [Group]?, [Profile]?) -> Void) {
+    func loadNews(completion: @escaping([News], String) -> Void) {
 
         let path = "newsfeed.get?"
         let url = baseUrl+path
@@ -170,33 +170,19 @@ class UserService {
             "user_ids": user.userId,
             "access_token": user.token,
             "filters": "post",
-            "count": "100",
+            "count": "20",
             "v": version
         ]
 
         Alamofire.request(url, method: .get, parameters: parameters).responseData { response in
             guard let data = response.value else { return }
                 do {
-                    let newsList = try JSONDecoder().decode(NewsList.self, from: data)
-                    var news = newsList.response.items
-                    let groups = newsList.response.groups
-                    let profiles = newsList.response.profiles
+                    let newsList = try JSONDecoder().decode(NewsList.self, from: data).response
+                    let nextFrom = newsList.nextFrom
+                    let news = self.fillingNews(newsList)
                     
-                    for index in 0..<news.count {
-                        var id = news[index].sourceID
-                        if id! > 0 {
-                            let profile = profiles?.first(where: { $0.id == id })
-                            news[index].sourceName = profile?.name
-                            news[index].sourcePhoto = profile?.photo
-                        } else {
-                            id!.negate()
-                            let group = groups?.first(where: { $0.id == id })
-                            news[index].sourceName = group?.name
-                            news[index].sourcePhoto = group?.photo
-                        }
-                    }
                     DispatchQueue.global().async(group: self.dispatchGroup) {
-                        completion(news, groups, profiles)
+                        completion(news, nextFrom ?? "")
                     }
                 } catch {
                     print(error)
@@ -204,5 +190,82 @@ class UserService {
         }
     }
    
+    func loadNewsWithNextFrom(nextFrom: String, completion: @escaping([News], String) -> Void) {
+
+        let path = "newsfeed.get?"
+        let url = baseUrl+path
+        let parameters: Parameters = [
+            "user_ids": user.userId,
+            "access_token": user.token,
+            "filters": "post",
+            "start_from": nextFrom,
+            "count": "20",
+            "v": version
+        ]
+
+        Alamofire.request(url, method: .get, parameters: parameters).responseData { response in
+            guard let data = response.value else { return }
+                do {
+                    let newsList = try JSONDecoder().decode(NewsList.self, from: data).response
+                    let nextFrom = newsList.nextFrom
+                    let news = self.fillingNews(newsList)
+                    
+                    DispatchQueue.global().async(group: self.dispatchGroup) {
+                        completion(news, nextFrom ?? "")
+                    }
+                } catch {
+                    print(error)
+                }
+        }
+    }
    
+    func loadNewsWithTime(timeInterval1970: Double, completion: @escaping([News]) -> Void) {
+
+        let path = "newsfeed.get?"
+        let url = baseUrl+path
+        let parameters: Parameters = [
+            "user_ids": user.userId,
+            "access_token": user.token,
+            "filters": "post",
+            "start_time": timeInterval1970,
+            "count": "10",
+            "v": version
+        ]
+
+        Alamofire.request(url, method: .get, parameters: parameters).responseData { response in
+            guard let data = response.value else { return }
+                do {
+                    let newsList = try JSONDecoder().decode(NewsList.self, from: data).response
+                    let news = self.fillingNews(newsList)
+                    
+                    DispatchQueue.global().async(group: self.dispatchGroup) {
+                        completion(news)
+                    }
+                } catch {
+                    print(error)
+                }
+        }
+        
+    }
+    
+    func fillingNews(_ newsList: NewsResponse) -> [News] {
+        var news = newsList.items
+        let groups = newsList.groups
+        let profiles = newsList.profiles
+        
+        for index in 0..<news.count {
+            var id = news[index].sourceID
+            if id! > 0 {
+                let profile = profiles?.first(where: { $0.id == id })
+                news[index].sourceName = profile?.name
+                news[index].sourcePhoto = profile?.photo
+            } else {
+                id!.negate()
+                let group = groups?.first(where: { $0.id == id })
+                news[index].sourceName = group?.name
+                news[index].sourcePhoto = group?.photo
+            }
+        }
+        return news
+    }
 }
