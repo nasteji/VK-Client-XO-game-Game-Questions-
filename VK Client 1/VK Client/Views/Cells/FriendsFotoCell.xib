@@ -16,30 +16,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="180" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dS4-z6-ZLv">
-                        <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="130" id="efE-nV-tl7"/>
-                            <constraint firstAttribute="height" constant="130" id="tCT-Or-Axu"/>
-                        </constraints>
-                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wA-91-3my" customClass="ILikeButton" customModule="VK_Client" customModuleProvider="target">
                         <rect key="frame" x="130" y="130" width="50" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="LBT-hF-98M"/>
-                            <constraint firstAttribute="width" constant="50" id="Wsg-Vd-I7p"/>
+                            <constraint firstAttribute="width" constant="50" id="SPg-qT-CqK"/>
+                            <constraint firstAttribute="height" constant="20" id="clW-AM-tzv"/>
                         </constraints>
                     </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dS4-z6-ZLv">
+                        <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="dS4-z6-ZLv" secondAttribute="height" multiplier="1:1" id="9A2-iA-6tq"/>
+                            <constraint firstAttribute="width" constant="130" id="LCc-2c-2RR"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="4wA-91-3my" secondAttribute="bottom" id="7RF-JC-Ln1"/>
+                <constraint firstAttribute="trailing" secondItem="4wA-91-3my" secondAttribute="trailing" id="29K-nY-YuH"/>
                 <constraint firstItem="dS4-z6-ZLv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CFt-Vp-bmU"/>
-                <constraint firstItem="4wA-91-3my" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="130" id="DGm-nm-npM"/>
-                <constraint firstAttribute="trailing" secondItem="4wA-91-3my" secondAttribute="trailing" id="OJJ-eZ-NbU"/>
-                <constraint firstItem="4wA-91-3my" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="130" id="aKp-Kv-tyt"/>
+                <constraint firstItem="4wA-91-3my" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="130" id="dtN-Yo-TV3"/>
+                <constraint firstAttribute="bottom" secondItem="4wA-91-3my" secondAttribute="bottom" id="gvt-eK-Q1X"/>
                 <constraint firstItem="dS4-z6-ZLv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="kss-JZ-rP3"/>
+                <constraint firstItem="4wA-91-3my" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="130" id="tiF-hD-DWp"/>
             </constraints>
             <connections>
                 <outlet property="friendImage" destination="dS4-z6-ZLv" id="Wzo-mw-SHH"/>

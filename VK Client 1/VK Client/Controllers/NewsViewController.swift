@@ -11,8 +11,13 @@ import RealmSwift
 class NewsViewController: UITableViewController {
 
     var news: [News] = []
+    let dispatchGroup = DispatchGroup()
     private var userService = UserService()
     private var imageService: ImageService?
+    
+    private var lastDate: Double?
+    var nextFrom = ""
+    var isLoading = false
   
     // MARK: - Life Cycle
     
@@ -20,9 +25,11 @@ class NewsViewController: UITableViewController {
         super.viewDidLoad()
         
         imageService = ImageService(container: tableView)
-        
+        setupRefreshControl()
         loadData()
-       
+        
+        tableView.prefetchDataSource = self
+        
         tableView.register(UINib(nibName: "NewsTextCell", bundle: nil), forCellReuseIdentifier: NewsTextCell.reuseId)
         tableView.register(UINib(nibName: "NewsPhotoCell", bundle: nil), forCellReuseIdentifier: NewsPhotoCell.reuseId)
         
@@ -35,12 +42,39 @@ class NewsViewController: UITableViewController {
     // MARK: - Service
     
     func loadData() {
-        userService.loadNews() { [weak self] news, groups, profiles in
+        userService.loadNews() { [weak self] news, nextFrom in
             self?.news = news
+            self?.nextFrom = nextFrom
+            self?.lastDate = news.first!.date
             
-            let dispatchGroup = DispatchGroup()
-            dispatchGroup.notify(queue: DispatchQueue.main) {
+            self?.dispatchGroup.notify(queue: DispatchQueue.main) {
                 self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    fileprivate func setupRefreshControl() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.attributedTitle = NSAttributedString(string: "Обновление...")
+        tableView.refreshControl?.tintColor = .purple
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
+    }
+    
+    @objc func refreshNews() {
+        guard let date = lastDate
+        else {
+            tableView.refreshControl?.endRefreshing()
+            return
+        }
+        userService.loadNewsWithTime(timeInterval1970: (date + 1)) { [weak self] news in
+            guard let self = self else { return }
+            self.news.insert(contentsOf: news, at: 0)
+            if !news.isEmpty {
+                self.lastDate = news.first!.date
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.tableView.refreshControl?.endRefreshing()
             }
         }
     }
@@ -67,7 +101,7 @@ class NewsViewController: UITableViewController {
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsHeaderView.reuseId) as? NewsHeaderView
         else { return nil }
 
-        headerView.configure(news: news[section])
+        headerView.configure(news: news[section], section: section)
         return headerView
     }
     
@@ -88,48 +122,75 @@ class NewsViewController: UITableViewController {
     //высота ячеек
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let news = news[indexPath.section]
+        let post = news[indexPath.section]
         
         switch indexPath.row {
         case 0:
-            return news.text == "" ? 0 : UITableView.automaticDimension
+            return post.text == "" ? 0 : UITableView.automaticDimension
         case 1:
-            return news.attachments?.first?.photo?.photo604 == nil ? 0 : UITableView.automaticDimension
+            if post.attachments?.first?.photo?.photo604 == nil {
+                return 0
+            }
+            let aspectRatio = post.attachments?.first?.photo?.aspectRatio ?? 1
+            return aspectRatio * view.frame.width
         default:
-            return news.text == "" && news.attachments?.first?.photo?.photo604 == nil ? UITableView.automaticDimension : 0
+            return post.text == "" && post.attachments?.first?.photo?.photo604 == nil ? UITableView.automaticDimension : 0
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let news = news[indexPath.section]
-        
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsTextCell.reuseId, for: indexPath) as! NewsTextCell
-            cell.configure(news: news)
-            cell.color(color: tableView.backgroundColor!, opacity: 1)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
-            
-            guard let urlImage = news.attachments?.first?.photo?.photo604
-            else { return UITableViewCell() }
-
-            let image = imageService?.photo(atIndexpath: indexPath, byUrl: urlImage)
-            cell.configure(image: image)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsPhotoCell.reuseId, for: indexPath) as! NewsPhotoCell
             cell.imageNewsView.image = UIImage(named: "placeholder")
             return cell
         }
-        
     }
-            
-            
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let post = news[indexPath.section]
+    
+        if let cell = cell as? NewsTextCell {
+            cell.configure(news: post)
+            cell.color(color: tableView.backgroundColor!, opacity: 1)
+        }
+        if let cell = cell as? NewsPhotoCell {
+            guard let urlImage = post.attachments?.first?.photo?.photo604 else { return }
 
-      
+            let image = imageService?.photo(atIndexpath: indexPath, byUrl: urlImage)
+            cell.configure(image: image)
+        }
+    }
+    
 }
 
+extension NewsViewController: UITableViewDataSourcePrefetching {
 
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard let maxSection = indexPaths.map({ $0.section }).max() else { return }
+
+        if maxSection > news.count - 3, !isLoading {
+            isLoading = true
+
+            userService.loadNewsWithNextFrom(nextFrom: nextFrom) { [weak self] news, nextFrom in
+                self?.nextFrom = nextFrom
+
+                guard let self = self else { return }
+                let indexSet = IndexSet(integersIn: self.news.count..<self.news.count + news.count)
+                self.news.append(contentsOf: news)
+                DispatchQueue.main.async {
+                    self.tableView.insertSections(indexSet, with: .automatic)
+                }
+                self.isLoading = false
+            }
+        }
+    }
+}

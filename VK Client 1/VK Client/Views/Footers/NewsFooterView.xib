@@ -37,9 +37,6 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="XIA-Au-0jI"/>
-                    </constraints>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -47,6 +44,7 @@
             <constraints>
                 <constraint firstItem="17p-PN-roR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0Td-sJ-hIf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="17p-PN-roR" secondAttribute="bottom" id="78z-Lj-xGK"/>
+                <constraint firstItem="17p-PN-roR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="V56-0b-Vd6"/>
                 <constraint firstAttribute="trailing" secondItem="17p-PN-roR" secondAttribute="trailing" id="VeX-o8-BKP"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
