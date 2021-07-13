@@ -77,13 +77,13 @@ class GameViewController: UITableViewController {
                 
                 Game.shared.addResult()
                 Game.shared.gameSession = nil
-                dismiss(animated: true, completion: nil)
+                navigationController?.popViewController(animated: true)
             } else {
                 results?(Date(), Game.shared.percentOfCorrectAnswers())
                 
                 Game.shared.addResult()
                 Game.shared.gameSession = nil
-                dismiss(animated: true, completion: nil)
+                navigationController?.popViewController(animated: true)
             }
         }
     }
