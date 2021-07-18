@@ -16,22 +16,33 @@ final class Game {
             resultsCareTaker.saveResults(results: results)
         }
     }
+    
+    private(set) var usersQuestions: [Question] {
+        didSet {
+            usersQuestionsCareTaker.saveQuestions(question: usersQuestions)
+        }
+    }
 
     private let resultsCareTaker = CareTaker()
+    private let usersQuestionsCareTaker = CareTaker()
    
     var gameSession: GameSession?
     
-    internal init(results: [Result]) {
+    var queueQuestions: Bool = true
+    
+    internal init(results: [Result], usersQuestions: [Question]) {
         self.results = results
+        self.usersQuestions = usersQuestions
     }
     
     private init() {
         results = resultsCareTaker.loadResults() ?? []
+        usersQuestions = usersQuestionsCareTaker.loadQuestions() ?? []
     }
     
     func percentOfCorrectAnswers() -> String {
         if let session = gameSession {
-            let result = (session.correctAnswers * 100) / session.questionsCount
+            let result = (session.correctAnswers.value * 100) / session.questionsCount
             return "\(result) %"
         } else {
             return ""
@@ -40,11 +51,19 @@ final class Game {
     
     func addResult() {
         let result = Result(date: Date(), result: percentOfCorrectAnswers())
-        results.append(result)
+        results.insert(result, at: 0)
     }
     
     func clearResult() {
         results.removeAll()
+    }
+    
+    func addQuestions(question: [Question]) {
+        usersQuestions.append(contentsOf: question)
+    }
+    
+    func clearQuestions() {
+        usersQuestions.removeAll()
     }
     
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Question {
+class Question: Equatable, Codable {
     
     let question: String
     let answers: [String]
@@ -18,6 +18,10 @@ class Question {
         self.answers = answers
         self.correctAnswer = correctAnswer
     }
+    
+    static func == (lhs: Question, rhs: Question) -> Bool {
+        lhs.question == rhs.question
+    }
 }
 
 extension Question {
@@ -26,8 +30,4 @@ extension Question {
     static var question3 = Question(question: "Когда устрицам необходимо размножаться, они  могут ...", answers: ["красить губы", "менять свой пол", "преодолевать 1000км", "петь песни"], correctAnswer: "менять свой пол")
     static var question4 = Question(question: "Божьи Коровки могут ...", answers: ["убирать за собой еду", "играть в карты", "пылесосить", "кормить деток конфетками"], correctAnswer: "убирать за собой еду")
     static var question5 = Question(question: "Крокодилы не могут ...", answers: ["быстро бегать", "есть рыбу", "есть друг друга", "высовывать язык"], correctAnswer: "высовывать язык")
-    
-    static func fake() -> [Question] {
-        [.question1, .question2, .question3, .question4, .question5]
-    }
 }

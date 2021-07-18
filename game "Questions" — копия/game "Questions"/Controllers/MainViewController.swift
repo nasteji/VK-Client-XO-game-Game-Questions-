@@ -10,8 +10,6 @@ import UIKit
 class MainViewController: UIViewController {
     
     @IBOutlet weak var lastResult: UILabel!
-    
-    var results: ((Date, String) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +30,6 @@ class MainViewController: UIViewController {
         guard let destinationVC = segue.destination as? GameViewController else { return }
         destinationVC.results = { [weak self] (date, result) in
             guard let self = self else { return }
-            self.results?(date, result)
             self.lastResult.text = "Правильных ответов: \(result)"
         }
         

@@ -10,6 +10,6 @@ import Foundation
 final class GameSession {
     
     var questionsCount: Int = 1
-    var correctAnswers: Int = 0
+    var correctAnswers = Observable<Int>(0)
     
 }
