@@ -18,7 +18,7 @@ class UserService {
     let dispatchGroup = DispatchGroup()
     
     // MARK: - Friends
-    func loadFriends(completion: @escaping() -> Void) {
+    func loadFriends() {
         
         let path = "friends.get?"
         let url = baseUrl+path
@@ -35,7 +35,6 @@ class UserService {
                 do {
                     let users = try JSONDecoder().decode(Friends.self, from: data)
                     self?.saveFriendsData(friends: users.response.items)
-                    completion()
                 } catch {
                     print(error)
                 }
