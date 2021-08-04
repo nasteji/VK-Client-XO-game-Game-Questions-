@@ -28,6 +28,10 @@
 		9CC5EC0C2699E1F40051E7D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CC5EC0B2699E1F40051E7D4 /* Assets.xcassets */; };
 		9CC5EC0F2699E1F40051E7D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CC5EC0D2699E1F40051E7D4 /* LaunchScreen.storyboard */; };
 		9CC5EC1C2699E2F50051E7D4 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC5EC1B2699E2F50051E7D4 /* Question.swift */; };
+		9CD4286426BA945D00FBAFAD /* SendActionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4286326BA945D00FBAFAD /* SendActionDelegate.swift */; };
+		9CD4286626BA947700FBAFAD /* NewQuestionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4286526BA947700FBAFAD /* NewQuestionDelegate.swift */; };
+		9CD4286926BA94DB00FBAFAD /* AddQuestionsTableViewControolerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4286826BA94DB00FBAFAD /* AddQuestionsTableViewControolerExtension.swift */; };
+		9CD4286B26BA9A6200FBAFAD /* CareTakerQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4286A26BA9A6200FBAFAD /* CareTakerQuestion.swift */; };
 		9CECBEFB26A40916008C3F7C /* AddQuestionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECBEF926A40916008C3F7C /* AddQuestionsTableViewCell.swift */; };
 		9CECBEFC26A40916008C3F7C /* AddQuestionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CECBEFA26A40916008C3F7C /* AddQuestionsTableViewCell.xib */; };
 		9CECBEFF26A41031008C3F7C /* QuestionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECBEFE26A41031008C3F7C /* QuestionBuilder.swift */; };
@@ -60,6 +64,10 @@
 		9CC5EC0E2699E1F40051E7D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CC5EC102699E1F40051E7D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CC5EC1B2699E2F50051E7D4 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		9CD4286326BA945D00FBAFAD /* SendActionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendActionDelegate.swift; sourceTree = "<group>"; };
+		9CD4286526BA947700FBAFAD /* NewQuestionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQuestionDelegate.swift; sourceTree = "<group>"; };
+		9CD4286826BA94DB00FBAFAD /* AddQuestionsTableViewControolerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionsTableViewControolerExtension.swift; sourceTree = "<group>"; };
+		9CD4286A26BA9A6200FBAFAD /* CareTakerQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareTakerQuestion.swift; sourceTree = "<group>"; };
 		9CECBEF926A40916008C3F7C /* AddQuestionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionsTableViewCell.swift; sourceTree = "<group>"; };
 		9CECBEFA26A40916008C3F7C /* AddQuestionsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddQuestionsTableViewCell.xib; sourceTree = "<group>"; };
 		9CECBEFE26A41031008C3F7C /* QuestionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBuilder.swift; sourceTree = "<group>"; };
@@ -95,6 +103,7 @@
 				9CBFE52C269D8DDF008263CC /* Game.swift */,
 				9CBFE52E269D8DE8008263CC /* GameSession.swift */,
 				9C11AE0E269DC314008356A6 /* CareTaker.swift */,
+				9CD4286A26BA9A6200FBAFAD /* CareTakerQuestion.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -137,6 +146,7 @@
 				9CC5EC172699E2650051E7D4 /* Models */,
 				9CC5EC182699E2750051E7D4 /* Views */,
 				9CC5EC192699E2930051E7D4 /* Controllers */,
+				9CD4286226BA943500FBAFAD /* Helpers */,
 				9CC5EC1A2699E29E0051E7D4 /* Resources */,
 			);
 			path = "game \"Questions\"";
@@ -157,8 +167,8 @@
 				9CC5EC1B2699E2F50051E7D4 /* Question.swift */,
 				9CBFE532269D9EB3008263CC /* Result.swift */,
 				9C791DC3269F074F007FEC3B /* Setting.swift */,
+				9CECBEFE26A41031008C3F7C /* QuestionBuilder.swift */,
 				9CB6C5BA269EF8FA002411DC /* Strategy */,
-				9CECBEFD26A41015008C3F7C /* New Group */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -193,12 +203,22 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		9CECBEFD26A41015008C3F7C /* New Group */ = {
+		9CD4286226BA943500FBAFAD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9CECBEFE26A41031008C3F7C /* QuestionBuilder.swift */,
+				9CD4286326BA945D00FBAFAD /* SendActionDelegate.swift */,
+				9CD4286526BA947700FBAFAD /* NewQuestionDelegate.swift */,
+				9CD4286726BA94B200FBAFAD /* Extensions */,
 			);
-			path = "New Group";
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		9CD4286726BA94B200FBAFAD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9CD4286826BA94DB00FBAFAD /* AddQuestionsTableViewControolerExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9CF0927F26A2E264007617AE /* Observable */ = {
@@ -282,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CF0928126A2E283007617AE /* ObservableOptions.swift in Sources */,
+				9CD4286B26BA9A6200FBAFAD /* CareTakerQuestion.swift in Sources */,
 				9CB6C5C0269EF9B1002411DC /* RandomQuestionStrategy.swift in Sources */,
 				9CBFE535269DA110008263CC /* ResultTableViewCell.swift in Sources */,
 				9CB6C5BC269EF930002411DC /* QuestionStrategy.swift in Sources */,
@@ -295,11 +316,14 @@
 				9C791DC4269F074F007FEC3B /* Setting.swift in Sources */,
 				9CF0928326A2ECD1007617AE /* Observable<Type>.swift in Sources */,
 				9CBFE52D269D8DDF008263CC /* Game.swift in Sources */,
+				9CD4286426BA945D00FBAFAD /* SendActionDelegate.swift in Sources */,
 				9CB6C5BE269EF99F002411DC /* LineQuestionStrategy.swift in Sources */,
+				9CD4286926BA94DB00FBAFAD /* AddQuestionsTableViewControolerExtension.swift in Sources */,
 				9CBFE533269D9EB3008263CC /* Result.swift in Sources */,
 				9CC5EC1C2699E2F50051E7D4 /* Question.swift in Sources */,
 				9CA837CD2699F32D0004484B /* AnswersTableViewCell.swift in Sources */,
 				9C11AE0F269DC314008356A6 /* CareTaker.swift in Sources */,
+				9CD4286626BA947700FBAFAD /* NewQuestionDelegate.swift in Sources */,
 				9CF0928526A2FAD1007617AE /* AddQuestionsTableViewController.swift in Sources */,
 				9CC5EC032699E1F30051E7D4 /* AppDelegate.swift in Sources */,
 				9CC5EC052699E1F30051E7D4 /* SceneDelegate.swift in Sources */,

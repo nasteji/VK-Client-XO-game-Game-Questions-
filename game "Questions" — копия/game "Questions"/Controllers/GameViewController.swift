@@ -23,14 +23,14 @@ class GameViewController: UITableViewController {
     var results: ((Date, String) -> Void)?
 
     var questions: [Question] = []
+    let userQuestions = Game.shared.usersQuestions
     var count = 0
     var gameSession = GameSession()
   
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        questions = questionStrategy.fake()
-        
+        questions = userQuestions + questionStrategy.fake()
         Game.shared.gameSession = gameSession
         gameSession.questionsCount = questions.count
         

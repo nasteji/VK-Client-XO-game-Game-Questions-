@@ -19,12 +19,12 @@ final class Game {
     
     private(set) var usersQuestions: [Question] {
         didSet {
-            usersQuestionsCareTaker.saveQuestions(question: usersQuestions)
+            usersQuestionsCareTaker.saveQuestions(questions: usersQuestions)
         }
     }
 
     private let resultsCareTaker = CareTaker()
-    private let usersQuestionsCareTaker = CareTaker()
+    private let usersQuestionsCareTaker = CareTakerQuestion()
    
     var gameSession: GameSession?
     

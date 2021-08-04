@@ -9,6 +9,10 @@ import Foundation
 
 class QuestionBuilder {
     
+    public static var shared = QuestionBuilder()
+    
+    private init() {}
+    
     private(set) var question: String = ""
     private(set) var answers: [String] = []
     private(set) var correctAnswer: String = ""
@@ -21,10 +25,8 @@ class QuestionBuilder {
         self.question = question
     }
     
-    func setAnswers(_ answer: String) {
-        //if !self.answers.contains(answer) {
-            answers.append(answer)
-        //}
+    func setAnswers(_ answers: [String]) {
+        self.answers = answers
     }
     
     func setCorrectAnswer(_ correctAnswer: String) {

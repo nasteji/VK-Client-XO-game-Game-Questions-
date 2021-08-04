@@ -9,18 +9,18 @@ import UIKit
 
 class AddQuestionsTableViewController: UITableViewController {
     
+    private var questionCell: AddQuestionsTableViewCell?
+    weak var senderDelegate: SendActionDelegate!
+    
+    var questionModel: Question!
+    
     @IBAction func saveQuestionsButton(_ sender: Any) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AddQuestionsTableViewCell") as! AddQuestionsTableViewCell
-        
-        if !self.newQuestions.contains(cell.newQuestion) {
-            self.newQuestions.append(cell.newQuestion)
-        }
-        
-        Game.shared.addQuestions(question: newQuestions)
+        senderDelegate.sendMessage()
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func addQuestionsButton(_ sender: Any) {
+        senderDelegate.sendMessage()
         countQuestions += 1
         tableView.reloadData()
     }
@@ -32,22 +32,24 @@ class AddQuestionsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: "AddQuestionsTableViewCell", bundle: nil), forCellReuseIdentifier: AddQuestionsTableViewCell.reuseId)
-
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return countQuestions
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AddQuestionsTableViewCell", for: indexPath) as! AddQuestionsTableViewCell
-        
-        cell.config()
-        return cell
-    }
     
-
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "AddQuestionsTableViewCell", for: indexPath) as? AddQuestionsTableViewCell {
+            
+            cell.config()
+            cell.delegate = self
+            senderDelegate = cell as SendActionDelegate
+            
+            return cell
+        }
+        return UITableViewCell()
+    }
     
 }

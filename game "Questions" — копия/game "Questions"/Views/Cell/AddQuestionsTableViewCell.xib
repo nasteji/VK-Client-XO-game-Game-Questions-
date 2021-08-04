@@ -26,9 +26,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="questionEditingDidEnd:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="w2W-Xm-Hbh"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tgp-vm-y07">
                                 <rect key="frame" x="0.0" y="39" width="310" height="30"/>
@@ -37,9 +34,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="correctAnswerDidEnd:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="tnm-8S-C6u"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e5Q-HL-HBF">
                                 <rect key="frame" x="0.0" y="74" width="310" height="30"/>
@@ -48,9 +42,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="answer1DidEnd:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="NPH-oJ-xQf"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6ek-os-d8f">
                                 <rect key="frame" x="0.0" y="109" width="310" height="30"/>
@@ -59,9 +50,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="answer2DidEnd:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="tzZ-zd-flA"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZJV-sS-J2e">
                                 <rect key="frame" x="0.0" y="144" width="310" height="30"/>
@@ -70,9 +58,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="answer3DidEnd:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="9OR-ZH-XRz"/>
-                                </connections>
                             </textField>
                         </subviews>
                     </stackView>
