@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import RealmSwift
 
-class UserService {
+class UserService: UserServiceInterface {
     
     let user = Session.shared
     let baseUrl = "https://api.vk.com/method/"

@@ -27,7 +27,8 @@ class FriendsFotoController: UIViewController, UICollectionViewDelegate, UIColle
         title = friendName
         collectionView.delegate = self
         
-         userService.loadUserPhotos(id: id) { [weak self] in
+        let proxyUserService = UserServiceProxy(userService: userService)
+        proxyUserService.loadUserPhotos(id: id) { [weak self] in
             self?.loadData()
         }
         
