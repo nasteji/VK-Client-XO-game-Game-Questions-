@@ -15,7 +15,7 @@ struct FriendsResponse: Codable {
     let count: Int
     let items: [User]
 }
-class User: Object, Codable {
+class User: Object, Codable, People {
     @objc dynamic var id: Int
     @objc dynamic var firstName: String
     @objc dynamic var lastName: String
@@ -35,5 +35,9 @@ class User: Object, Codable {
 struct Objects {
     
     var sectionName : String
-    var sectionObjects : [User]
+    var sectionObjects : [People]
+}
+
+protocol People {
+    
 }

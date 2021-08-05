@@ -11,20 +11,30 @@ import RealmSwift
 
 class MyFriendsViewController: UITableViewController {
     
-    var users = [User]()
+    private let userService = FriendAdapter()
     
-    var usersDictionary = [String: [User]]()
-    var objectArray = [Objects]()
+    private var usersDictionary = [String: [Friend]]()
+    private var objectArray = [Objects]()
     
-    var token = NotificationToken()
-    let service = PromiseService()
+    private let viewModelFactory = ListViewModelFactory()
+    private var viewModels: [ListViewModel] = []
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadFriends()
+        userService.getFriends { [weak self] user in
+            guard let self = self else { return }
+            self.usersDictionary = Friend.dictionary(users: user)
+            for (key, value) in self.usersDictionary {
+                   self.objectArray.append(Objects(sectionName: key, sectionObjects: value))
+                   self.objectArray.sort(by: { $0.sectionName.lowercased() < $1.sectionName.lowercased() } )
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
         
         tableView.register(UINib(nibName: "ListCell", bundle: nil), forCellReuseIdentifier: ListCell.reuseID)
 
@@ -32,64 +42,6 @@ class MyFriendsViewController: UITableViewController {
         tableView.register(headerNib, forHeaderFooterViewReuseIdentifier: CustomHeaderView.reuseID)
     }
 
-    // MARK: - Service
-    
-    func loadFriends() {
-        service.getUrl()
-            .then(on: DispatchQueue.global(), service.getData(_:))
-            .then(service.getParsedData(_:))
-            .done(on: DispatchQueue.main) { users in
-                self.loadData()
-                self.readData()
-            }
-            .catch { error in
-                print(error)
-            }
-    }
-    
-    // MARK: - Load and Read Data
-    
-    func loadData() {
-        do {
-            let realm = try Realm()
-            let users = realm.objects(User.self)
-            self.users = Array(users)
-        } catch {
-            print(error)
-        }
-        
-        self.usersDictionary = User.dictionary(users: users)
-        
-        for (key, value) in self.usersDictionary {
-            self.objectArray.append(Objects(sectionName: key, sectionObjects: value))
-            self.objectArray.sort(by: { $0.sectionName.lowercased() < $1.sectionName.lowercased() } )
-        }
-        tableView.reloadData()
-    }
-    
-    func readData() {
-        guard let realm = try? Realm() else { return }
-        let users = realm.objects(User.self)
-        token = users.observe { changes in
-            guard let tableView = self.tableView else { return }
-            
-            switch changes {
-            case .initial:
-                tableView.reloadData()
-                print("Start to modified Users")
-            case .update(let results, deletions: let deletions, insertions: let insertions, modifications: let modifications):
-                tableView.beginUpdates()
-                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-                tableView.endUpdates()
-                print("Users were modified: \(results)")
-            case .error(let error):
-                print("Error: \(error.localizedDescription)")
-            }
-        }
-    }
-    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -121,9 +73,9 @@ class MyFriendsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.reuseID, for: indexPath) as! ListCell
         
-        let user = objectArray[indexPath.section].sectionObjects[indexPath.row]
-        cell.configure(user: user)
+        self.viewModels = self.viewModelFactory.constructUserViewModels(from: objectArray[indexPath.section].sectionObjects as! [Friend])
         
+        cell.configure(with: viewModels[indexPath.row])
         return cell
     }
 
@@ -139,7 +91,7 @@ class MyFriendsViewController: UITableViewController {
         if let controller = segue.destination as? FriendsFotoController,
            let indexPath = tableView.indexPathForSelectedRow {
 
-            let user = objectArray[indexPath.section].sectionObjects[indexPath.row]
+            let user = objectArray[indexPath.section].sectionObjects[indexPath.row] as! Friend
 
             controller.friendName = user.firstName + " " + user.lastName
             controller.id = user.id

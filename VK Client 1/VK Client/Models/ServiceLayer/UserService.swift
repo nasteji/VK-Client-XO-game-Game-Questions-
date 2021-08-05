@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import RealmSwift
 
-class UserService {
+class UserService: UserServiceInterface {
     
     let user = Session.shared
     let baseUrl = "https://api.vk.com/method/"
@@ -18,7 +18,7 @@ class UserService {
     let dispatchGroup = DispatchGroup()
     
     // MARK: - Friends
-    func loadFriends(completion: @escaping() -> Void) {
+    func loadFriends() {
         
         let path = "friends.get?"
         let url = baseUrl+path
@@ -35,7 +35,6 @@ class UserService {
                 do {
                     let users = try JSONDecoder().decode(Friends.self, from: data)
                     self?.saveFriendsData(friends: users.response.items)
-                    completion()
                 } catch {
                     print(error)
                 }
