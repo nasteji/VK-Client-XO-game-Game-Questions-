@@ -15,6 +15,7 @@ final class AppDetailViewController: UIViewController {
     private let imageDownloader = ImageDownloader()
     
     lazy var headerDetailViewController = AppDetailHeaderViewController(app: app)
+    lazy var newVersionDetailViewController = AppDetailNewVersionViewController(app: app)
     
     private var appDetailView: AppDetailView {
         return self.view as! AppDetailView
@@ -30,19 +31,11 @@ final class AppDetailViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
-    
-//    override func loadView() {
-//        super.loadView()
-//        self.view = AppDetailView()
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
-        
-//        self.configureNavigationController()
-//        self.downloadImage()
     }
     
     // MARK: - Private
@@ -53,7 +46,7 @@ final class AppDetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         
         addHeaderViewController()
-        addDescriptionViewController()
+        addNewVersionViewController()
     }
     
     private func addHeaderViewController() {
@@ -72,37 +65,20 @@ final class AppDetailViewController: UIViewController {
         
     }
     
-    private func addDescriptionViewController() {
-        //ДЗ Добавить другие модули
-        let descriptionVC = UIViewController()
+    private func addNewVersionViewController() {
+        self.view.addSubview(newVersionDetailViewController.view)
+        self.addChild(newVersionDetailViewController)
+        newVersionDetailViewController.didMove(toParent: self)
         
-        self.view.addSubview(descriptionVC.view)
-        self.addChild(descriptionVC)
-        descriptionVC.didMove(toParent: self)
-        
-        guard let descriptionView = descriptionVC.view else { return }
-        descriptionView.translatesAutoresizingMaskIntoConstraints = false
+        guard let newVersionView = newVersionDetailViewController.view else { return }
+        newVersionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            descriptionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            descriptionView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            descriptionView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+            newVersionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 220),
+            newVersionView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            newVersionView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
         
     }
     
-//    private func configureNavigationController() {
-//        self.navigationController?.navigationBar.tintColor = UIColor.white;
-//        self.navigationItem.largeTitleDisplayMode = .never
-//    }
-//
-//    private func downloadImage() {
-//        guard let url = self.app?.iconUrl else { return }
-//        self.appDetailView.throbber.startAnimating()
-//        self.imageDownloader.getImage(fromUrl: url) { (image, error) in
-//            self.appDetailView.throbber.stopAnimating()
-//            guard let image = image else { return }
-//            self.appDetailView.imageView.image = image
-//        }
-//    }
 }

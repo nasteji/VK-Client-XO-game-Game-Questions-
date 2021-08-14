@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SearchViewDelegate: AnyObject {
+    func controlTapped()
+}
+
 final class SearchView: UIView {
     
     // MARK: - Subviews
@@ -16,6 +20,10 @@ final class SearchView: UIView {
     let tableView = UITableView()
     let emptyResultView = UIView()
     let emptyResultLabel = UILabel()
+    
+    let items = ["App", "Song"]
+    var segmentedControl = UISegmentedControl()
+    weak var delegate: SearchViewDelegate?
     
     // MARK: - Init
     
@@ -36,6 +44,7 @@ final class SearchView: UIView {
         self.addSearchBar()
         self.addTableView()
         self.addEmptyResultView()
+        self.addSegmentedControl()
         self.setupConstraints()
     }
     
@@ -69,11 +78,26 @@ final class SearchView: UIView {
         self.emptyResultView.addSubview(self.emptyResultLabel)
     }
     
+    private func addSegmentedControl() {
+        let segmentedControlWithItems = UISegmentedControl(items: items)
+        segmentedControl = segmentedControlWithItems
+        self.segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.backgroundColor = .blue
+        segmentedControl.selectedSegmentIndex = 0
+        self.addSubview(self.segmentedControl)
+        
+        segmentedControl.addTarget(self, action: #selector(controlToggle) , for: .valueChanged)
+    }
+    
+    @objc func controlToggle() {
+        delegate?.controlTapped()
+    }
+    
     private func setupConstraints() {
         let safeArea = self.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            self.searchBar.topAnchor.constraint(equalTo: self.topAnchor, constant: 8.0),
+            self.searchBar.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 2.0),
             self.searchBar.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             self.searchBar.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             
@@ -88,7 +112,11 @@ final class SearchView: UIView {
             self.emptyResultView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
             self.emptyResultLabel.topAnchor.constraint(equalTo: self.emptyResultView.topAnchor, constant: 12.0),
             self.emptyResultLabel.leadingAnchor.constraint(equalTo: self.emptyResultView.leadingAnchor),
-            self.emptyResultLabel.trailingAnchor.constraint(equalTo: self.emptyResultView.trailingAnchor)
+            self.emptyResultLabel.trailingAnchor.constraint(equalTo: self.emptyResultView.trailingAnchor),
+            
+            self.segmentedControl.topAnchor.constraint(equalTo: self.topAnchor),
+            self.segmentedControl.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            self.segmentedControl.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
             ])
     }
 }
