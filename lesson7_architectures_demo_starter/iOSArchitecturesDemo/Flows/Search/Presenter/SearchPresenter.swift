@@ -27,32 +27,25 @@ protocol SearchViewOutput: AnyObject {
 class SearchPresenter {
     weak var viewInput: (UIViewController & SearchViewInput)?
     
-    private let searchService = ITunesSearchService()
+    let interactor: SearchInteractorInput
+    let router: SearchRouterInput
     
-    private func requestApp(with query: String) {
-        searchService.getApps(forQuery: query) { [weak self] result in
-            guard let self = self else { return }
-            
-            self.viewInput?.throbber(show: false)
-            
-            result
-                .withValue { apps in
-                    guard !apps.isEmpty else {
-                        self.viewInput?.searchResults = []
-                        self.viewInput?.showNoResults()
-                        return
-                    }
-                    self.viewInput?.hideNoResults()
-                    self.viewInput?.searchResults = apps
-                }
-                .withError {
-                    self.viewInput?.showError(error: $0)
-                }
-        }
+    init(interactor: SearchInteractorInput, router: SearchRouterInput) {
+        self.interactor = interactor
+        self.router = router
     }
     
-    private func requestSong(with query: String) {
-        searchService.getSongs(forQuery: query) { [weak self] result in
+    private func openDetails(with app: ITunesApp) {
+        router.openDetails(for: app)
+    }
+}
+
+extension SearchPresenter: SearchViewOutput {
+    
+    func viewDidSearchSong(with query: String) {
+        viewInput?.throbber(show: true)
+        
+        interactor.requestSongs(with: query) { [weak self] result in
             guard let self = self else { return }
             
             self.viewInput?.throbber(show: false)
@@ -73,22 +66,28 @@ class SearchPresenter {
         }
     }
     
-    private func openDetails(with app: ITunesApp) {
-        let appDetaillViewController = AppDetailViewController(app: app)
-        viewInput?.navigationController?.pushViewController(appDetaillViewController, animated: true)
-    }
-}
-
-extension SearchPresenter: SearchViewOutput {
-    
-    func viewDidSearchSong(with query: String) {
-        viewInput?.throbber(show: true)
-        requestSong(with: query)
-    }
-    
     func viewDidSearch(with query: String) {
         viewInput?.throbber(show: true)
-        requestApp(with: query)
+        
+        interactor.requestApps(with: query) { [weak self] (result) in
+            guard let self = self else { return }
+            
+            self.viewInput?.throbber(show: false)
+
+            result
+                .withValue { apps in
+                    guard !apps.isEmpty else {
+                        self.viewInput?.searchResults = []
+                        self.viewInput?.showNoResults()
+                        return
+                    }
+                    self.viewInput?.hideNoResults()
+                    self.viewInput?.searchResults = apps
+                }
+                .withError {
+                    self.viewInput?.showError(error: $0)
+                }
+        }
     }
     
     func viewDidSelectApp(app: ITunesApp) {
