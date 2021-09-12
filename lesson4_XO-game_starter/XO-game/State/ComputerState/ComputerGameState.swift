@@ -11,7 +11,7 @@ import Foundation
 class ComputerGameState: GameState {
     
     var isMoveCompleted: Bool = false
-    let player: Player!
+    var player: Player!
     weak var gameViewControler: GameWithComputerViewController?
     var gameBoard: Gameboard
     var gameBoardView: GameboardView
@@ -36,10 +36,15 @@ class ComputerGameState: GameState {
             gameViewControler?.gameboardView.placeMarkView(markViewPrototype, at: position)
             gameViewControler?.gameBoard.setPlayer(player, at: position)
         case .second:
-            let column = Int.random(in: 0...2)
-            let row = Int.random(in: 0...2)
-            let randomPosition = GameboardPosition(column: column, row: row)
+            var randomPosition = GameboardPosition(column: 0, row: 0)
+            
+            while gameBoardView.canPlaceMarkView(at: randomPosition) == false {
+                let column = Int.random(in: 0...2)
+                let row = Int.random(in: 0...2)
+                randomPosition = GameboardPosition(column: column, row: row)
+            }
             gameViewControler?.gameboardView.placeMarkView(markViewPrototype, at: randomPosition)
+            gameViewControler?.gameBoard.setPlayer(player, at: randomPosition)
         case .none:
             break
         }
