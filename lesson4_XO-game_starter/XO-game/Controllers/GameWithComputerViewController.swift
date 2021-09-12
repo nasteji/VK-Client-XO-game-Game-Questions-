@@ -25,6 +25,7 @@ class GameWithComputerViewController: UIViewController {
             currentState.begin()
         }
     }
+    var position: GameboardPosition?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class GameWithComputerViewController: UIViewController {
         
         gameboardView.onSelectPosition = { [weak self] position in
             guard let self = self else { return }
-            
+            self.position = position
             self.currentState.addSign(at: position)
             self.counter += 1
             if self.currentState.isMoveCompleted {
@@ -44,20 +45,18 @@ class GameWithComputerViewController: UIViewController {
     }
     
     private func firstPlayerTurn() {
-        let firstPlayer: Player = .first
-        currentState = ComputerGameState(player: firstPlayer, gameViewControler: self,
-                                       gameBoard: gameBoard,
-                                       gameboardView: gameboardView,
-                                       markViewPrototype: firstPlayer.markViewPrototype)
+        winner()
         
+        let firstPlayer: Player = .first
+        currentState = ComputerGameState(player: firstPlayer,
+                                         gameViewControler: self,
+                                         gameBoard: gameBoard,
+                                         gameboardView: gameboardView,
+                                         markViewPrototype: firstPlayer.markViewPrototype)
     }
     
     private func nextPlayerTurn() {
-        if let winner = referee.determineWinner() {
-            currentState = ComputerGameEndState(winnerPlayer: winner, gameViewControler: self)
-            Logger.shared.log(action: .gameFinished(winner: winner))
-            return
-        }
+        winner()
         
         if counter >= 9 {
             Logger.shared.log(action: .gameFinished(winner: nil))
@@ -66,15 +65,26 @@ class GameWithComputerViewController: UIViewController {
         }
         
         if let playerState = currentState as? ComputerGameState{
+            self.counter += 1
             let nextPlayer = playerState.player.next
             currentState = ComputerGameState(player: nextPlayer,
-                                           gameViewControler: self,
-                                           gameBoard: gameBoard,
-                                           gameboardView: gameboardView,
-                                           markViewPrototype: nextPlayer.markViewPrototype)
+                                             gameViewControler: self,
+                                             gameBoard: gameBoard,
+                                             gameboardView: gameboardView,
+                                             markViewPrototype: nextPlayer.markViewPrototype)
+            currentState.addSign(at: position ?? GameboardPosition(column: 0, row: 0))
+            self.firstPlayerTurn()
         }
     }
     
+    private func winner() {
+        if let winner = referee.determineWinner() {
+            currentState = ComputerGameEndState(winnerPlayer: winner, gameViewControler: self)
+            Logger.shared.log(action: .gameFinished(winner: winner))
+            return
+        }
+    }
+        
     @IBAction func restartButtonTapped(_ sender: UIButton) {
         gameboardView.clear()
         gameBoard.clear()
