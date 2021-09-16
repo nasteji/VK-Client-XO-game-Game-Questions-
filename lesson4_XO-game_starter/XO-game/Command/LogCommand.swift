@@ -10,24 +10,9 @@ import Foundation
 
 class LogCommand {
     
-    let action: LogAction
+    var playerPosition: PlayerPosition
     
-    init(action: LogAction) {
-        self.action = action
-    }
-    
-    var logMessage: String {
-        switch action {
-        case .playerSetMarkView(let player, let position):
-            return "\(player) placed sign at position \(position)"
-        case .gameFinished(let winner):
-            if let winner = winner {
-                return "\(winner) won game"
-            } else {
-                return "Is draw"
-            }
-        case .restartGame:
-            return "Game was restarted"
-        }
+    init(playerPosition: PlayerPosition) {
+        self.playerPosition = playerPosition
     }
 }

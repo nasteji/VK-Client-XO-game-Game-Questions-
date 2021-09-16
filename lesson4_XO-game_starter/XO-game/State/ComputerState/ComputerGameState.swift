@@ -30,7 +30,8 @@ class ComputerGameState: GameState {
     func addSign(at position: GameboardPosition) {
         guard !isMoveCompleted else { return }
         
-        Logger.shared.log(action: .playerSetMarkView(player: player, position: position))
+//        Logger.shared.log(action: .playerSetMarkView(player: player, position: position))
+        
         switch player {
         case .first:
             gameViewControler?.gameboardView.placeMarkView(markViewPrototype, at: position)

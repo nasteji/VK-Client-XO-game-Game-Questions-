@@ -10,11 +10,11 @@ import Foundation
 
 class Logger {
     public static var shared = Logger()
-    
+
     private init() {}
-    
-    public func log(action: LogAction) {
-        let command = LogCommand(action: action)
+
+    public func log(playerPosition: PlayerPosition) {
+        let command = LogCommand(playerPosition: playerPosition)
         LogInvoker.shared.addLogCommand(command: command)
     }
 }

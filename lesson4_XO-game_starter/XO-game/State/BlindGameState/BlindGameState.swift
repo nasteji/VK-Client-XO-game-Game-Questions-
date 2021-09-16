@@ -1,22 +1,23 @@
 //
-//  PlayerGameState.swift
+//  BlindGameState.swift
 //  XO-game
 //
-//  Created by Veaceslav Chirita on 19.07.2021.
+//  Created by Анастасия Живаева on 12.09.2021.
 //  Copyright © 2021 plasmon. All rights reserved.
 //
 
 import Foundation
 
-class PlayerGameState: GameState {
+class BlindGameState: GameState {
+    
     var isMoveCompleted: Bool = false
-    let player: Player!
-    weak var gameViewControler: GameViewController?
+    var player: Player!
+    weak var gameViewControler: BlindGameViewController?
     var gameBoard: Gameboard
     var gameBoardView: GameboardView
     var markViewPrototype: MarkView
     
-    init(player: Player?, gameViewControler: GameViewController,
+    init(player: Player?, gameViewControler: BlindGameViewController,
          gameBoard: Gameboard,
          gameboardView: GameboardView, markViewPrototype: MarkView) {
         self.player = player
@@ -28,6 +29,8 @@ class PlayerGameState: GameState {
     
     func addSign(at position: GameboardPosition) {
         guard !isMoveCompleted else { return }
+        Logger.shared.log(playerPosition: PlayerPosition(player: player, position: position, gameBoard: gameBoard, gameBoardView: gameBoardView))
+           
         gameViewControler?.gameboardView.placeMarkView(markViewPrototype, at: position)
         gameViewControler?.gameBoard.setPlayer(player, at: position)
         
@@ -45,9 +48,8 @@ class PlayerGameState: GameState {
         case .none:
             break
         }
-        
+
         gameViewControler?.winnerLabel.isHidden = true
     }
-    
     
 }

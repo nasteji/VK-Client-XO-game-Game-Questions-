@@ -56,12 +56,12 @@ class GameViewController: UIViewController {
     private func nextPlayerTurn() {
         if let winner = referee.determineWinner() {
             currentState = GameEndState(winnerPlayer: winner, gameViewControler: self)
-            Logger.shared.log(action: .gameFinished(winner: winner))
+            //Logger.shared.log(action: .gameFinished(winner: winner))
             return
         }
         
         if counter >= 9 {
-            Logger.shared.log(action: .gameFinished(winner: nil))
+            //Logger.shared.log(action: .gameFinished(winner: nil))
             currentState = GameEndState(winnerPlayer: nil, gameViewControler: self)
             return
         }
@@ -83,7 +83,7 @@ class GameViewController: UIViewController {
         
         firstPlayerTurn()
         
-        Logger.shared.log(action: .restartGame)
+ //       Logger.shared.log(action: .restartGame)
     }
 }
 

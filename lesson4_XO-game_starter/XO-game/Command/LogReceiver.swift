@@ -9,7 +9,11 @@
 import Foundation
 
 class LogReceiver {
-    func sendMessage(message: String) {
-        print(message)
+    func execute(playerPosition: PlayerPosition) {
+        if playerPosition.gameBoardView.canPlaceMarkView(at: playerPosition.position) == false {
+            playerPosition.gameBoardView.removeMarkView(at: playerPosition.position)
+        }
+        playerPosition.gameBoardView.placeMarkView(playerPosition.player.markViewPrototype, at: playerPosition.position)
+        playerPosition.gameBoard.setPlayer(playerPosition.player, at: playerPosition.position)
     }
 }

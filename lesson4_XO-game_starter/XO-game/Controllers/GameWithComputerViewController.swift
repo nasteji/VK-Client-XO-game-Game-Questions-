@@ -59,7 +59,6 @@ class GameWithComputerViewController: UIViewController {
         winner()
         
         if counter >= 9 {
-            Logger.shared.log(action: .gameFinished(winner: nil))
             currentState = ComputerGameEndState(winnerPlayer: nil, gameViewControler: self)
             return
         }
@@ -80,8 +79,6 @@ class GameWithComputerViewController: UIViewController {
     private func winner() {
         if let winner = referee.determineWinner() {
             currentState = ComputerGameEndState(winnerPlayer: winner, gameViewControler: self)
-            Logger.shared.log(action: .gameFinished(winner: winner))
-            return
         }
     }
         
@@ -92,7 +89,6 @@ class GameWithComputerViewController: UIViewController {
         
         firstPlayerTurn()
         
-        Logger.shared.log(action: .restartGame)
     }
 
 

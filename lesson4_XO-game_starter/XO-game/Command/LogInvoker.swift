@@ -13,19 +13,27 @@ class LogInvoker {
     
     private let receiver = LogReceiver()
     private var commands: [LogCommand] = []
-    private let bufferSize = 5
+    private let bufferSize = 10
     
     private init() {}
     
     func addLogCommand(command: LogCommand) {
         commands.append(command)
-        execute()
     }
     
-    private func execute() {
+    func execute() {
         guard commands.count >= bufferSize else { return }
+        var firstIndex = 0
+        let halfBufferSize = bufferSize / 2
         
-        commands.forEach { receiver.sendMessage(message: $0.logMessage) }
+        while firstIndex <= (halfBufferSize - 1) {
+            receiver.execute(playerPosition: commands[firstIndex].playerPosition)
+
+            let lastIndex = firstIndex + halfBufferSize
+            receiver.execute(playerPosition: commands[lastIndex].playerPosition)
+         
+            firstIndex += 1
+        }
         commands = []
     }
 }

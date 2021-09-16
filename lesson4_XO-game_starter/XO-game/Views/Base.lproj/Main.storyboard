@@ -35,6 +35,15 @@
                                     <segue destination="qxi-Li-YRE" kind="presentation" modalPresentationStyle="fullScreen" id="egN-6y-y3Z"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PpT-Sf-Kln">
+                                <rect key="frame" x="142" y="404" width="99" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="blind play"/>
+                                <connections>
+                                    <segue destination="Hws-BG-TiQ" kind="presentation" modalPresentationStyle="fullScreen" id="TdP-1a-mdB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VxJ-mB-5ic"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -209,6 +218,90 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4XN-7x-1bC" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-666" y="902"/>
+        </scene>
+        <!--Blind Game View Controller-->
+        <scene sceneID="aPx-eN-cjy">
+            <objects>
+                <viewController id="Hws-BG-TiQ" customClass="BlindGameViewController" customModule="XO_game" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uec-9d-2Pc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQa-b9-VcF">
+                                <rect key="frame" x="150.5" y="621" width="74" height="26"/>
+                                <inset key="contentEdgeInsets" minX="12" minY="4" maxX="12" maxY="4"/>
+                                <state key="normal" title="Restart"/>
+                                <connections>
+                                    <action selector="restartButtonTapped:" destination="Hws-BG-TiQ" eventType="touchUpInside" id="aoP-Zk-PHw"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1st player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZM-kh-p2I">
+                                <rect key="frame" x="44" y="44" width="72.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2nd player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6f-zZ-Yz4">
+                                <rect key="frame" x="251" y="44" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="loY-uH-eoy">
+                                <rect key="frame" x="0.0" y="114" width="375" height="485"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmw-T3-jdt" customClass="GameboardView" customModule="XO_game" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="71" width="343" height="343"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="lmw-T3-jdt" secondAttribute="height" id="zMn-mD-mhT"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="lmw-T3-jdt" firstAttribute="centerY" secondItem="loY-uH-eoy" secondAttribute="centerY" id="79v-d6-b2P"/>
+                                    <constraint firstItem="lmw-T3-jdt" firstAttribute="leading" secondItem="loY-uH-eoy" secondAttribute="leading" constant="16" id="8xS-34-rui"/>
+                                    <constraint firstAttribute="trailing" secondItem="lmw-T3-jdt" secondAttribute="trailing" constant="16" id="fJz-2l-Qg8"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winner is 1st player!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3Z-3B-Yxv">
+                                <rect key="frame" x="111" y="85" width="153" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XgC-3e-ETu"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XgC-3e-ETu" firstAttribute="trailing" secondItem="loY-uH-eoy" secondAttribute="trailing" id="2oi-nZ-vW2"/>
+                            <constraint firstItem="t3Z-3B-Yxv" firstAttribute="centerX" secondItem="XgC-3e-ETu" secondAttribute="centerX" id="8ad-9G-ny7"/>
+                            <constraint firstItem="nZM-kh-p2I" firstAttribute="leading" secondItem="XgC-3e-ETu" secondAttribute="leading" constant="44" id="E1H-hB-SiC"/>
+                            <constraint firstItem="XgC-3e-ETu" firstAttribute="bottom" secondItem="CQa-b9-VcF" secondAttribute="bottom" constant="20" id="HU9-i4-Crz"/>
+                            <constraint firstItem="CQa-b9-VcF" firstAttribute="top" secondItem="loY-uH-eoy" secondAttribute="bottom" constant="22" id="PqW-bm-zRK"/>
+                            <constraint firstItem="loY-uH-eoy" firstAttribute="leading" secondItem="XgC-3e-ETu" secondAttribute="leading" id="RIY-sY-BSB"/>
+                            <constraint firstItem="loY-uH-eoy" firstAttribute="top" secondItem="t3Z-3B-Yxv" secondAttribute="bottom" constant="8" id="Wll-8W-VVY"/>
+                            <constraint firstItem="nZM-kh-p2I" firstAttribute="top" secondItem="XgC-3e-ETu" secondAttribute="top" constant="44" id="awq-RV-cKG"/>
+                            <constraint firstItem="CQa-b9-VcF" firstAttribute="centerX" secondItem="XgC-3e-ETu" secondAttribute="centerX" id="dln-nm-8dg"/>
+                            <constraint firstItem="t3Z-3B-Yxv" firstAttribute="top" secondItem="nZM-kh-p2I" secondAttribute="bottom" constant="20" id="fNj-Cd-F3X"/>
+                            <constraint firstItem="B6f-zZ-Yz4" firstAttribute="top" secondItem="XgC-3e-ETu" secondAttribute="top" constant="44" id="fhK-Zx-Ixt"/>
+                            <constraint firstItem="XgC-3e-ETu" firstAttribute="trailing" secondItem="B6f-zZ-Yz4" secondAttribute="trailing" constant="44" id="kBE-fQ-84f"/>
+                            <constraint firstItem="B6f-zZ-Yz4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nZM-kh-p2I" secondAttribute="trailing" constant="8" symbolic="YES" id="l3w-d4-S2j"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="v9D-xk-UpZ"/>
+                    <connections>
+                        <outlet property="firstPlayerTurnLabel" destination="nZM-kh-p2I" id="Bva-f8-Rvb"/>
+                        <outlet property="gameboardView" destination="lmw-T3-jdt" id="5sz-0g-w7G"/>
+                        <outlet property="restartButton" destination="CQa-b9-VcF" id="5kS-Tv-hTx"/>
+                        <outlet property="secondPlayerTurnLabel" destination="B6f-zZ-Yz4" id="3kX-1s-adn"/>
+                        <outlet property="winnerLabel" destination="t3Z-3B-Yxv" id="0hr-Kf-5FA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Yg-kO-svP" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137" y="902"/>
         </scene>
